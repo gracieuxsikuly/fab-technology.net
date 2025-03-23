@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+      <!-- Favicons -->
+      <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
+      <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
     <head>
         @include('partials.head')
     </head>
@@ -135,5 +138,7 @@
         {{ $slot }}
 
         @fluxScripts
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
+    
 </html>

@@ -13,6 +13,7 @@ Route::view('dashboard', 'backend.dashboard')
     Route::view('aboutus', 'backend.about')
     ->middleware(['auth', 'verified'])
     ->name('about');
+    
     Route::view('nos-realisation', 'backend.realisation')
     ->middleware(['auth', 'verified'])
     ->name('realisation');

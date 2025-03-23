@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('image')->nullable();
+            $table->enum('categori',['tous','terrain','attelier','service','installation','programmation'])->default('tous');
             $table->timestamps();
         });
     }

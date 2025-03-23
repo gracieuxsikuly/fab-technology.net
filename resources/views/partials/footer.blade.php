@@ -4,13 +4,14 @@
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6 footer-about">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <span class="sitename">BizPage</span>
+                    <span class="sitename">Fab-Technology</span>
                 </a>
                 <div class="footer-contact pt-3">
-                    <p>A108 Adam Street</p>
-                    <p>New York, NY 535022</p>
-                    <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                    <p><strong>Email:</strong> <span>info@example.com</span></p>
+                    <p style="text-align: justify;">Fab-Technology est une entreprise qui a vu le jour en 2018, est un fournisseur indépendant et 
+                        complet de services et de produits informatiques. Il s’agit d’une entreprise de services 
+                        informatiques et de maintenance devenue l’une des meilleures en RDC et plus particulièrement
+                         au Nord-Kivu dans la ville de Goma. </p>
+                   
                 </div>
                 <div class="social-links d-flex mt-4">
                     <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -21,18 +22,19 @@
             </div>
 
             <div class="col-lg-2 col-md-3 footer-links">
-                <h4>Useful Links</h4>
+                <h4>Liens utiles</h4>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Terms of service</a></li>
-                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">Acceuil</a></li>
+                    <li><a href="#">Apropos de nous</a></li>
+                    <li><a href="#">Nos services</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Notre Equipe</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-2 col-md-3 footer-links">
-                <h4>Our Services</h4>
+                <h4>Nos services</h4>
                 <ul>
                     <li><a href="#">Web Design</a></li>
                     <li><a href="#">Web Development</a></li>
@@ -43,25 +45,37 @@
             </div>
 
             <div class="col-lg-4 col-md-12 footer-newsletter">
-                <h4>Our Newsletter</h4>
-                <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-                <form action="forms/newsletter.php" method="post" class="php-email-form">
-                    <div class="newsletter-form"><input type="email" name="email"><input type="submit"
-                            value="Subscribe"></div>
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-                </form>
+                <h4>Nos contacts</h4>
+                <p>
+                    RDC/Nord-Kivu/Ville de Goma
+                </p>
+                <p class="mt-3">
+                    <strong>Num Tél:</strong> <a href="tel:+243847451389"><span>+243847451389</span></a></p>
+                <p>
+                    <strong>Email:</strong> <a href="mailto:info@fab-technology.net"><span>info@fab-technology.net</span></a> 
+                  </p>
+                  <p>
+                    RDC/Haut Katanga/Haut Katanga ville de Lubumbashi
+                </p>
+                <p class="mt-3">
+                    <strong>Num Tél:</strong> <a href="tel:+243995502421"><span>+243995502421</span></a></p>
+                <p>
+                    <strong>Email:</strong> <a href="mailto:info@fab-technology.net"><span>info@fab-technology.net</span></a> 
+                  </p>         
+                {{-- <p>A108 Adam Street</p>
+                    <p>New York, NY 535022</p>
+                    <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+                    <p><strong>Email:</strong> <span>info@example.com</span></p> --}}
             </div>
 
         </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">BizPage</strong> <span>All Rights Reserved</span>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Fab-Technology</strong> <span>Tous droits réservés</span>
         </p>
         <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Developed by <a href="https://www.linkedin.com/in/gracieux-sikuly-4aba2118b">Gsikuly</a>
         </div>
     </div>
 

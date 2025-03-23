@@ -14,6 +14,13 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="information-circle" :href="route('about')" :current="request()->routeIs('about')" wire:navigate>{{ __('Apropos de nous') }}</flux:navlist.item>
+                    <flux:navlist.item icon="briefcase" :href="route('realisation')" :current="request()->routeIs('realisation')" wire:navigate>{{ __('Realisation') }}</flux:navlist.item>
+                    <flux:navlist.item icon="wrench" :href="route('services')" :current="request()->routeIs('services')" wire:navigate>{{ __('Nos services') }}</flux:navlist.item>
+                    <flux:navlist.item icon="photo" :href="route('gallery')" :current="request()->routeIs('gallery')" wire:navigate>{{ __('Notre galery') }}</flux:navlist.item>
+                    <flux:navlist.item icon="users" :href="route('equipe')" :current="request()->routeIs('equipe')" wire:navigate>{{ __('Notre equipe') }}</flux:navlist.item>
+                    <flux:navlist.item icon="question-mark-circle" :href="route('faqs')" :current="request()->routeIs('faqs')" wire:navigate>{{ __('Faqs') }}</flux:navlist.item>
+                    <flux:navlist.item icon="envelope" :href="route('message')" :current="request()->routeIs('message')" wire:navigate>{{ __('Message') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

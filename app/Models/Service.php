@@ -10,10 +10,15 @@ class Service extends Model
         'title',
         'description',
         'image',
+        'slug'
     ];
 
     public function getImagePathAttribute()
     {
         return storage_path('app/public/' . $this->image);
     }
+
+
+
+
 }

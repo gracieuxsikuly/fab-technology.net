@@ -40,8 +40,8 @@
 
             <a href="index.html" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="{{asset('assets/img/logo.png')}}" alt="">
-                {{-- <h1 class="sitename">BizPage</h1> --}}
+                <img src="{{asset('assets/img/logo.jpg')}}" alt="">
+                <h1 class="sitename">FAB-TECHNOLOGY</h1>
             </a>
 
             @include('partials.menu')
@@ -58,57 +58,47 @@
                 data-bs-interval="5000">
 
                 <div class="carousel-item active">
-                    <img src="assets/img/hero-carousel/hero-carousel-1.jpg" alt="">
+                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-1.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>We are professional</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="#featured-services" class="btn-get-started">Get Started</a>
+                        <h2>Infrastructure Réseau de Pointe pour Entreprises</h2>
+                        <p>Nos ingénieurs IT conçoivent et optimisent des infrastructures réseau modernes pour assurer une connectivité stable et sécurisée. Performance et fiabilité au cœur de votre entreprise.</p>
+                        <a href="#featured-services" class="btn-get-started">Entrez en contact</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
-                    <img src="assets/img/hero-carousel/hero-carousel-2.jpg" alt="">
+                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-6.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>At vero eos et accusamus</h2>
-                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id
-                            quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-                            Temporibus autem quibusdam et aut officiis debitis aut.</p>
-                        <a href="#featured-services" class="btn-get-started">Get Started</a>
+                        <h2>Installation et Configuration de Connexion Internet par Satellite</h2>
+                        <p>Nos ingénieurs spécialisés assurent l’installation et la configuration de solutions VSAT pour une connectivité internet fiable, même dans les zones les plus reculées. Internet partout, sans limites.</p>
+                        <a href="#featured-services" class="btn-get-started">Entrez en contact</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
-                    <img src="assets/img/hero-carousel/hero-carousel-3.jpg" alt="">
+                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-3.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>Temporibus autem quibusdam</h2>
-                        <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                            aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
-                            nesciunt omnis iste natus error sit voluptatem accusantium.</p>
-                        <a href="#featured-services" class="btn-get-started">Get Started</a>
+                        <h2>Solutions Cloud Innovantes pour Votre Entreprise</h2>
+                        <p>Optimisez vos infrastructures avec nos services de cloud computing, gestion de serveurs virtuels et solutions de stockage sécurisées. Profitez de la puissance du numérique pour une performance optimale</p>
+                        <a href="#featured-services" class="btn-get-started">Entrez en contact</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
-                    <img src="assets/img/hero-carousel/hero-carousel-4.jpg" alt="">
+                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-4.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>Nam libero tempore</h2>
-                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                            sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                            voluptatem. Ut enim ad minima veniam, quis nostrum.</p>
-                        <a href="#featured-services" class="btn-get-started">Get Started</a>
+                        <h2>Expertise en Infrastructure Réseau et Serveurs</h2>
+                        <p>Nos ingénieurs IT assurent l’installation et la configuration optimales de vos serveurs dans un centre de données ultra-moderne. Sécurité, performance et innovation pour une connectivité sans faille.</p>
+                        <a href="#featured-services" class="btn-get-started">Entrez en contact</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
-                    <img src="assets/img/hero-carousel/hero-carousel-5.jpg" alt="">
+                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-5.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>Magnam aliquam quaerat</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="#featured-services" class="btn-get-started">Get Started</a>
+                        <h2>Développement Web et Hébergement de Qualité</h2>
+                        <p>Nos experts en programmation web et hébergement assurent des solutions performantes et adaptées à vos besoins. Une expertise locale pour des services digitaux de pointe</p>
+                        <a href="#featured-services" class="btn-get-started">Entrez en contact</a>
                     </div>
                 </div><!-- End Carousel Item -->
 

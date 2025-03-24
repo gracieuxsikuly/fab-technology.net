@@ -18,6 +18,15 @@ Route::view('dashboard', 'backend.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('realisation');
 
+    Route::view('notre-vision', 'backend.vision')
+    ->middleware(['auth', 'verified'])
+    ->name('vision');
+    Route::view('notre-mission', 'backend.mission')
+    ->middleware(['auth', 'verified'])
+    ->name('mission');
+    Route::view('nos-projets', 'backend.projets')
+    ->middleware(['auth', 'verified'])
+    ->name('projet');
     Route::view('nos-services', 'backend.services')
     ->middleware(['auth', 'verified'])
     ->name('services');

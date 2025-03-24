@@ -19,6 +19,9 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="information-circle" :href="route('about')" :current="request()->routeIs('about')" wire:navigate>{{ __('Apropos de nous') }}</flux:navlist.item>
                     <flux:navlist.item icon="briefcase" :href="route('realisation')" :current="request()->routeIs('realisation')" wire:navigate>{{ __('Realisation') }}</flux:navlist.item>
+                    <flux:navlist.item icon="arrow-trending-up" :href="route('vision')" :current="request()->routeIs('vision')" wire:navigate>{{ __('Notre vision') }}</flux:navlist.item>
+                    <flux:navlist.item icon="bolt" :href="route('mission')" :current="request()->routeIs('mission')" wire:navigate>{{ __('Notre mission') }}</flux:navlist.item>
+                    <flux:navlist.item icon="presentation-chart-line" :href="route('projet')" :current="request()->routeIs('projet')" wire:navigate>{{ __('Nos projets') }}</flux:navlist.item>
                     <flux:navlist.item icon="wrench" :href="route('services')" :current="request()->routeIs('services')" wire:navigate>{{ __('Nos services') }}</flux:navlist.item>
                     <flux:navlist.item icon="photo" :href="route('gallery')" :current="request()->routeIs('gallery')" wire:navigate>{{ __('Notre galery') }}</flux:navlist.item>
                     <flux:navlist.item icon="users" :href="route('equipe')" :current="request()->routeIs('equipe')" wire:navigate>{{ __('Notre equipe') }}</flux:navlist.item>

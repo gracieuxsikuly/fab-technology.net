@@ -1,6 +1,6 @@
 <div>
     <flux:modal.trigger name="create-aboutmd">
-    <flux:button variant="primary">Enregistre les informations</flux:button>
+    <flux:button variant="primary">Enregistrer les informations</flux:button>
 </flux:modal.trigger><br>
 {{-- pour la creation --}}
 <flux:modal name="create-aboutmd" class="md:w-[800px]"> 

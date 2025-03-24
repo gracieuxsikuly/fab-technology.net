@@ -10,4 +10,12 @@ class Realisationcount extends Model
         'designation',
         'nombre',
     ];
+    public static function getDesigantionOptions()
+    {
+        return [
+            'Clients' => 'Clients',
+            'Projets' => 'Projets',
+            'Support' => 'Support',
+        ];
+    }
 }

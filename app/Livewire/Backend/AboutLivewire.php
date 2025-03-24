@@ -32,11 +32,19 @@ class AboutLivewire extends Component
     ];
     public function saveabout(){
         if($this->isUpdate){
-            $this->validate();
-            $about=About::find($this->isUpdate);
+            $about=About::where('id',$this->idabout);
             if($this->photo){
-                $this->photo->store('assets/img/about', 'public');
-                $this->photo = $this->photo->hashName();
+                    // Valide rla  photo
+                    $this->validate([
+                        'photo' => 'required|image|mimes:jpg,png,webp|max:2048', // 2MB Max, formats acceptés : jpg, png, webp
+                        ],[
+                        'photo.required' => 'La photo est requise.',
+                        'photo.image' => 'Le fichier doit être une image.',
+                        'photo.mimes' => 'Le fichier doit être de type : jpg, png ou webp.',
+                        'photo.max' => 'L\'image ne doit pas dépasser 2 Mo.',
+                        ]);
+                    $this->photo->store('assets/img/about', 'public');
+                    $this->photo = $this->photo->hashName();
                 $about->image=$this->photo;
             }
             $about->title=$this->title;
@@ -49,9 +57,8 @@ class AboutLivewire extends Component
             ->success()
             ->toast()
             ->position('bottom-end')
-            ->show();;
+            ->show();
         }else{
-            $this->validate();
             if($this->photo){
                 $this->photo->store('assets/img/about', 'public');
                 $this->photo = $this->photo->hashName();
@@ -73,10 +80,11 @@ class AboutLivewire extends Component
     }
     public function edit($id){
         $this->isUpdate=true;
-        $about=About::find($id);
-        $this->title=$about->title;
-        $this->description=$about->description;
-        $this->photo=$about->image;
+        $about=About::where('id',$id)->first();
+        $this->title= $about->title;
+        $this->description= $about->description;
+        $this->oldlogo= $about->image;
+        $this->idabout=$id;
         Flux::modal('create-aboutmd')->show();
     }
 

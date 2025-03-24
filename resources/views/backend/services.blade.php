@@ -4,6 +4,6 @@
         <flux:subheading size="lg" class="mb-6">{{ __('Gérez touts vos services') }}</flux:subheading>
         <flux:separator variant="subtle" />
     </div>
-    {{-- <livewire:posts/> --}}
+    <livewire:backend.service-livewire/>
     </x-layouts.app>
     

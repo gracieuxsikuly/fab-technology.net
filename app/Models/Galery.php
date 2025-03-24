@@ -14,9 +14,8 @@ class Galery extends Model
 
     public function getImagePathAttribute()
     {
-        return storage_path('app/public/' . $this->image);
+        return storage_path('/assets/img/galery' . $this->image);
     }
-    // enum categori  $table->enum('categori',['tous','terrain','attelier','service','installation','programmation'])
     // charger ca pour un select
     public static function getCategoriOptions()
     {

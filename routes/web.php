@@ -33,6 +33,10 @@ Route::view('dashboard', 'backend.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('faqs');
 
+    Route::view('competencedomaine', 'backend.domainecompetence')
+    ->middleware(['auth', 'verified'])
+    ->name('competencedomaine');
+
     Route::view('message', 'backend.message')
     ->middleware(['auth', 'verified'])
     ->name('message');
@@ -44,5 +48,6 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
+
 
 require __DIR__.'/auth.php';

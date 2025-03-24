@@ -18,17 +18,17 @@ class RealisationLivewire extends Component
     // validation
     protected $rules = [
         'designation' => 'required|string|max:255',
-        'nombre' => 'required|integ ',
+        'nombre' => 'required',
     ];
     // message de validation
     protected $messages = [
         'designation.required' => 'Le titre est requis.',
         'nombre.required' => 'Le nombre est requis.',
-        'nombre.integer' => 'Le nombre doit être un entier.',
     ];
     public function savereal(){
+        $this->validate();
         if($this->isUpdate){
-            $real=Realisationcount::where('id',$this->idreal)->first();
+            $real=Realisationcount::find($this->idreal);
             $real->designation=$this->designation;
             $real->nombre=$this->nombre;
             $real->save();
@@ -47,6 +47,7 @@ class RealisationLivewire extends Component
                 'nombre' => $this->nombre,
             ]);
             $this->nombre='';
+            $this->isUpdate=false;
              Flux::modal('create-realmd')->close();
              LivewireAlert::text('Information modifiée avec succès')
             ->success()

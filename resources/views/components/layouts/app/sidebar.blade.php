@@ -23,6 +23,7 @@
                     <flux:navlist.item icon="photo" :href="route('gallery')" :current="request()->routeIs('gallery')" wire:navigate>{{ __('Notre galery') }}</flux:navlist.item>
                     <flux:navlist.item icon="users" :href="route('equipe')" :current="request()->routeIs('equipe')" wire:navigate>{{ __('Notre equipe') }}</flux:navlist.item>
                     <flux:navlist.item icon="question-mark-circle" :href="route('faqs')" :current="request()->routeIs('faqs')" wire:navigate>{{ __('Faqs') }}</flux:navlist.item>
+                    <flux:navlist.item icon="computer-desktop" :href="route('competencedomaine')" :current="request()->routeIs('competencedomaine')" wire:navigate>{{ __('Domaine de Competence') }}</flux:navlist.item>
                     <flux:navlist.item icon="envelope" :href="route('message')" :current="request()->routeIs('message')" wire:navigate>{{ __('Message') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>

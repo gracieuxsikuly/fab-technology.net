@@ -22,17 +22,14 @@ class ServiceLivewire extends Component
     protected $rules = [
         'title' => 'required|string|max:255',
         'description' => 'required|string',
-        'photo' => 'nullable|image|mimes:jpg,png,webp|max:2048', // 2MB Max, formats acceptés : jpg, png, webp
     ];
     // message de validation
     protected $messages = [
         'title.required' => 'Le titre est requis.',
         'description.required' => 'La description est requise.',
-        'photo.image' => 'Le fichier doit être une image.',
-        'photo.mimes' => 'Le fichier doit être de type : jpg, png ou webp.',
-        'photo.max' => 'L\'image ne doit pas dépasser 2 Mo.',
     ];
     public function saveservice(){
+        $this->validate();
         if($this->isUpdate){
             $serv = Service::find($this->idserv);
             if($this->photo){
@@ -65,6 +62,14 @@ class ServiceLivewire extends Component
             ->show();
         }else{
             if($this->photo){
+                $this->validate([
+                    'photo' => 'required|image|mimes:jpg,png,webp|max:2048', // 2MB Max, formats acceptés : jpg, png, webp
+                    ],[
+                    'photo.required' => 'La photo est requise.',
+                    'photo.image' => 'Le fichier doit être une image.',
+                    'photo.mimes' => 'Le fichier doit être de type : jpg, png ou webp.',
+                    'photo.max' => 'L\'image ne doit pas dépasser 2 Mo.',
+                    ]);
                 $this->photo->store('assets/img/service', 'public');
                 $this->photo = $this->photo->hashName();
             }
@@ -77,6 +82,7 @@ class ServiceLivewire extends Component
             $this->title='';
             $this->description='';
             $this->photo=null;
+            $this->isUpdate=false;
              Flux::modal('create-servicemd')->close();
              LivewireAlert::text('Information modifiée avec succès')
             ->success()

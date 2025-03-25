@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom')->nullable();
             $table->string('object')->nullable();
-            $table->string('message')->nullable();
+            $table->text('message')->nullable();
             $table->string('email')->nullable();
             $table->timestamps();
         });

@@ -21,19 +21,19 @@
                 </div>
             </div>
 
-            <div class="col-lg-2 col-md-3 footer-links">
+            <div class="col-lg-4 col-md-3 footer-links">
                 <h4>Liens utiles</h4>
                 <ul>
-                    <li><a href="#">Acceuil</a></li>
-                    <li><a href="#">Apropos de nous</a></li>
-                    <li><a href="#">Nos services</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">Notre Equipe</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#hero" class="active">Accueil</a></li>
+                    <li><a href="#about">A propos de nous</a></li>
+                    <li><a href="#services">Nos Services</a></li>
+                    <li><a href="#portfolio">Galeries</a></li>
+                    <li><a href="#team">Notre Equipe</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
 
-            <div class="col-lg-2 col-md-3 footer-links">
+            {{-- <div class="col-lg-2 col-md-3 footer-links">
                 <h4>Nos services</h4>
                 <ul>
                     <li><a href="#">Web Design</a></li>
@@ -42,7 +42,7 @@
                     <li><a href="#">Marketing</a></li>
                     <li><a href="#">Graphic Design</a></li>
                 </ul>
-            </div>
+            </div> --}}
 
             <div class="col-lg-4 col-md-12 footer-newsletter">
                 <h4>Nos contacts</h4>

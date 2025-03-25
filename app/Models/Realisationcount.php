@@ -16,6 +16,7 @@ class Realisationcount extends Model
             'Clients' => 'Clients',
             'Projets' => 'Projets',
             'Support' => 'Support',
+            'Équipe' => 'Équipe',
         ];
     }
 }

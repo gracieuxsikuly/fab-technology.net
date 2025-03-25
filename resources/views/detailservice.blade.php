@@ -123,25 +123,24 @@
 
         <!-- /Stats Section -->
         <livewire:front.realisation>
-            {{-- end service --}}
-            {{-- domaine intervation --}}
-            <livewire:front.service>
         <!-- Services Section -->
-        {{-- <livewire:front.domainecompetence> --}}
+        <livewire:front.service>
         <!-- /Services Section -->
 
         <!-- Call To Action Section -->
         <section id="call-to-action" class="call-to-action section dark-background">
 
-            <img src="{{asset('assets/img/cta-bg.jpg')}}" alt="">
+            <img src="assets/img/cta-bg.jpg" alt="">
 
             <div class="container">
                 <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
                     <div class="col-xl-10">
                         <div class="text-center">
-                            <h3>Passons à l'action</h3>
-                            <p>Une solution adaptée à vos besoins vous attend. Contactez-nous dès aujourd'hui pour discuter de votre projet et obtenir des résultats concrets.</p>
-                            <a class="cta-btn" style="cursor: pointer;" id="services">Passons à l'action</a>
+                            <h3>Call To Action</h3>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit anim id est laborum.</p>
+                            <a class="cta-btn" href="#">Call To Action</a>
                         </div>
                     </div>
                 </div>
@@ -158,8 +157,8 @@
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Ils nous font confiance</h2>
-                <p>Lisez ce que nos clients disent de leur collaboration avec nous.</p>
+                <h2>Testimonials</h2>
+                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -185,8 +184,8 @@
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                                <h3>Sophie D., Directrice IT</h3>
-                                <h4>Wunder &amp; Corporation</h4>
+                                <h3>Saul Goodman</h3>
+                                <h4>Ceo &amp; Founder</h4>
                                 <div class="stars">
                                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                         class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -194,7 +193,9 @@
                                 </div>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Grâce à Fab Technology, notre migration vers le cloud s'est déroulée sans interruption. Leur équipe a été réactive, transparente sur les coûts, et leur expertise nous a évité des semaines de downtime. Un partenaire de confiance !</span>
+                                    <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum
+                                        suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et.
+                                        Maecen aliquam, risus at semper.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>
@@ -203,8 +204,8 @@
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                                <h3> Thomas L.</h3>
-                                <h4>Gérant de la boutique Topfiv</h4>
+                                <h3>Sara Wilsson</h3>
+                                <h4>Designer</h4>
                                 <div class="stars">
                                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                         class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -212,7 +213,9 @@
                                 </div>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>On cherchait un prestataire informatique qui comprendrait nos enjeux sans jargon inutile. Fab Technology a sécurisé notre réseau et formé nos équipes avec patience. Aujourd’hui, on travaille sereinement !</span>
+                                    <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum
+                                        quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat
+                                        irure amet legam anim culpa.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>
@@ -221,8 +224,8 @@
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                                <h3>Dr. Karim M.</h3>
-                                <h4>CTO, WordlviStyp</h4>
+                                <h3>Jena Karlis</h3>
+                                <h4>Store Owner</h4>
                                 <div class="stars">
                                     <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                         class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
@@ -230,7 +233,49 @@
                                 </div>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Leur audit a identifié des failles critiques que notre équipe interne n’avait pas détectées. Leurs solutions sur mesure et leur support 24/7 ont dépassé nos attentes.</span>
+                                    <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla
+                                        quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore
+                                        quis sint minim.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                                <h3>Matt Brandon</h3>
+                                <h4>Freelancer</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim
+                                        fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore
+                                        quem dolore labore illum veniam.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                                <h3>John Larson</h3>
+                                <h4>Entrepreneur</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor
+                                        noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam
+                                        esse veniam culpa fore nisi cillum quid.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
                             </div>
@@ -245,7 +290,7 @@
         </section><!-- /Testimonials Section -->
 
         <!-- Team Section team -->
-        <livewire:front.team>
+        <livewie:front.team>
         <!-- /Team Section -->
 
 
@@ -280,19 +325,7 @@
 
     <!-- Main JS File -->
     <script src="{{asset('assets/js/main.js')}}"></script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/67e2e9ea4bbde1190a845e06/1in763f9u';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-    <!--End of Tawk.to Script-->
+
 </body>
 
 </html>

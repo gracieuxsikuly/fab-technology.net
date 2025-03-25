@@ -5,8 +5,10 @@ use Livewire\Volt\Volt;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
-
+})->name('home'); 
+Route::get('/service-details/{slug}', function ($slug) {
+    return view('detailservice', ['slug' => $slug]);
+})->name('servicedetails');
 Route::view('dashboard', 'backend.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

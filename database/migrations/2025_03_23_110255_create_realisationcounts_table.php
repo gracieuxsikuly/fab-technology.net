@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('realisationcounts', function (Blueprint $table) {
             $table->id();
-            $table->enum('designation',['Clients','Projets','Support'])->nullable();
+            $table->enum('designation',['Clients','Projets','Support','Équipe'])->nullable();
             $table->integer('nombre')->nullable();
             $table->timestamps();
         });

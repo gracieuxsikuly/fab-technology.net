@@ -59,6 +59,7 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3 font-semibold">ID</th>
+                <th scope="col" class="px-6 py-3 font-semibold">Image</th>
                 <th scope="col" class="px-6 py-3 font-semibold">Title</th>
                 <th scope="col" class="px-6 py-3 font-semibold">Description</th>
                 <th scope="col" class="px-6 py-3 font-semibold">Actions</th>
@@ -68,6 +69,13 @@
             @forelse ( $abouts as $about )
             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $about->id }}</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">
+                    @if($about->image)
+                    <img src="{{ asset('assets/img/about/'.$about->image) }}" alt="Image" class="w-16 h-16 object-cover">
+                    @else
+                    <span class="text-red-500">No Image</span>
+                    @endif
+                </td>
                 <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $about->title }}</td>
                 <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $about->description }}</td>
                 <td class="px-6 py-4">
@@ -78,7 +86,7 @@
             </tr>
             @empty
             <tr>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300 text-center" colspan="4">No data found.</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300 text-center" colspan="5">No data found.</td>
             </tr>
             @endforelse
         </tbody>

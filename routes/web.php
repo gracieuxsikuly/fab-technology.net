@@ -24,7 +24,7 @@ Route::view('dashboard', 'backend.dashboard')
     Route::view('notre-mission', 'backend.mission')
     ->middleware(['auth', 'verified'])
     ->name('mission');
-    Route::view('nos-projets', 'backend.projets')
+    Route::view('nos-projets', 'backend.projet')
     ->middleware(['auth', 'verified'])
     ->name('projet');
     Route::view('nos-services', 'backend.services')

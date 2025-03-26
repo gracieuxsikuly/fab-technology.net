@@ -83,21 +83,21 @@
   <main class="main">
 
     <!-- Page Title -->
-    <div class="page-title dark-background" data-aos="fade" style="background-image: url({{asset('assets/img/page-title-bg1.webp')}});">
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url({{asset('assets/img/page-title-bg.webp')}});">
       <div class="container position-relative">
-        <h1>Details de serivce</h1>
+        <h1>Details</h1>
         <p>Des solutions tech fiables qui simplifient votre quotidien professionnel.</p>
         <nav class="breadcrumbs">
           <ol>
             <li><a href="{{ route('home')}}">Home</a></li>
-            <li class="current">Service Details</li>
+            <li class="current">Details</li>
           </ol>
         </nav>
       </div>
     </div><!-- End Page Title -->
 
     <!-- Service Details Section -->
-    <livewire:front.detail-service :slug="$slug" />
+    <livewire:front.visionmissionprojet-detail :designation="$designation" :id="$id" />
     <!-- /Service Details Section -->
 
   </main>

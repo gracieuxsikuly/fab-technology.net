@@ -3,7 +3,7 @@
     <div class="container footer-top">
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6 footer-about">
-                <a href="index.html" class="logo d-flex align-items-center">
+                <a href="#hero" class="logo d-flex align-items-center">
                     <span class="sitename">Fab-Technology</span>
                 </a>
                 <div class="footer-contact pt-3">
@@ -24,7 +24,7 @@
             <div class="col-lg-4 col-md-3 footer-links">
                 <h4>Liens utiles</h4>
                 <ul>
-                    <li><a href="#hero" class="active">Accueil</a></li>
+                    <li><a href="{{ route('home') }}" class="active">Accueil</a></li>
                     <li><a href="#about">A propos de nous</a></li>
                     <li><a href="#services">Nos Services</a></li>
                     <li><a href="#portfolio">Galeries</a></li>
@@ -72,10 +72,15 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Fab-Technology</strong> <span>Tous droits réservés</span>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">
+            @php
+                $year = date('Y');
+                echo $year;
+            @endphp
+            </strong> <span>Tous droits réservés</span>
         </p>
         <div class="credits">
-            Developed by <a href="https://www.linkedin.com/in/gracieux-sikuly-4aba2118b">Gsikuly</a>
+            Developed by <a href="#">Fab-Technology</a>
         </div>
     </div>
 

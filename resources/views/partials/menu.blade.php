@@ -1,6 +1,6 @@
 <nav id="navmenu" class="navmenu">
     <ul>
-      <li><a href="#hero" class="active">Accueil</a></li>
+      <li><a href="{{ route('home') }}" class="active">Accueil</a></li>
       <li><a href="#about">A propos de nous</a></li>
       <li><a href="#services">Nos Services</a></li>
       <li><a href="#portfolio">Galeries</a></li>

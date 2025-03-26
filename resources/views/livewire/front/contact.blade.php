@@ -15,7 +15,8 @@
                     <div class="info-item d-flex flex-column justify-content-center align-items-center">
                         <i class="bi bi-geo-alt"></i>
                         <h3>Address</h3>
-                        <p>RDC/Nord-Kivu/Ville de Goma, RDC/Haut Katanga/Haut Katanga ville de Lubumbashi</p>
+                        <p>RDC/Nord-Kivu/Ville de Goma</p>
+                        <p> RDC/Haut Katanga/Haut Katanga ville de Lubumbashi</p>
                     </div>
                 </div><!-- End Info Item -->
 
@@ -24,7 +25,8 @@
                         class="info-item d-flex flex-column justify-content-center align-items-center info-item-borders">
                         <i class="bi bi-telephone"></i>
                         <h3>Appelez nous</h3>
-                        <p> +243847451389|+243995502421</p>
+                        <p> +243847451389</p>
+                        <p>+243995502421</p>
                     </div>
                 </div><!-- End Info Item -->
 

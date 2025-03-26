@@ -9,6 +9,13 @@ Route::get('/', function () {
 Route::get('/service-details/{slug}', function ($slug) {
     return view('detailservice', ['slug' => $slug]);
 })->name('servicedetails');
+
+Route::get('/fabtech-details/{designation}/{id}', function ($designation,$id) {
+    return view('visionmissionprojet', [
+        'designation' => $designation,
+        'id' => $id]);
+})->name('visionmissionprojet');
+
 Route::view('dashboard', 'backend.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

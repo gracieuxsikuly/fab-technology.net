@@ -11,6 +11,7 @@ class EquipeLivewire extends Component
 {
     use WithFileUploads;
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $designation;
     public $fonction;
     public $phone;

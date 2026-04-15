@@ -12,6 +12,7 @@ class ServiceLivewire extends Component
 {
     use WithFileUploads;
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $title='';
     public $description='';
     public $photo=null;

@@ -12,6 +12,7 @@ class GalleryLivewire extends Component
 {
     use WithFileUploads;
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $title;
     public $categori;
     public $photo,$oldlogo;

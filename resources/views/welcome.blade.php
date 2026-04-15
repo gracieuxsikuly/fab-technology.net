@@ -148,20 +148,20 @@
 
         </section><!-- /Hero Section -->
         <!-- About Section -->
-        <livewire:front.about>
-            <!-- /About Section -->
+        <livewire:front.about />
+        <!-- /About Section -->
    <!-- projet mision vision -->
-   <livewire:front.vision-mision-projet>
+   <livewire:front.vision-mision-projet />
  <!-- /projet mision vision -->
             <!-- Stats Section realisation-->
-            <livewire:front.realisation>
+            <livewire:front.realisation />
             <!-- /Stats Section -->
                     <!-- Services Section -->
-                    <livewire:front.service>
+                    <livewire:front.service />
                       {{-- end service --}}
 
                         <!-- Domaine de compétence Section -->
-                        <livewire:front.domainecompetence>
+                        <livewire:front.domainecompetence />
                         <!-- /Domaine de compétence Section -->
 
                         <!-- Call To Action Section -->
@@ -184,7 +184,7 @@
                         </section><!-- /Call To Action Section -->
 
                         <!-- Portfolio Section ou galery -->
-                        <livewire:front.galery>
+                        <livewire:front.galery />
                             <!-- /Portfolio Section -->
 
                             <!-- Testimonials Section -->
@@ -291,16 +291,16 @@
                             </section><!-- /Testimonials Section -->
 
                             <!-- Team Section team -->
-                            <livewire:front.team>
+                            <livewire:front.team />
                                 <!-- /Team Section -->
 
 
                                 <!-- Faq Section -->
-                                <livewire:front.faq>
+                                <livewire:front.faq />
                                     <!-- /Faq Section -->
 
                                     <!-- Contact Section -->
-                                    <livewire:front.contact>
+                                    <livewire:front.contact />
                                         <!-- /Contact Section -->
 
     </main>

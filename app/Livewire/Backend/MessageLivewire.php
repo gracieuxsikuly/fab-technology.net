@@ -12,6 +12,7 @@ class MessageLivewire extends Component
 { 
     use WithFileUploads;
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $idMessage;
     public function delete($id)
     {

@@ -11,6 +11,7 @@ class FaqsLivewire extends Component
 {
     use WithFileUploads;
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $question;
 public $answer;
 public $isUpdate = false;

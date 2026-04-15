@@ -5,7 +5,7 @@
           <div class="row gy-4">
     
             <div class="col-lg-4">
-                @foreach ($visons as $vision)
+                @forelse ($visions as $vision)
                 <article class="d-flex flex-column">
     
                     <div class="post-img">
@@ -13,7 +13,7 @@
                     </div>
         
                     <h2 class="title">
-                      <a href="{{ route('visionmissionprojet', ['designation'=>$vision->title,'id'=>$vision->id]) }}">{{$vision->title}}</a>
+                      <a href="{{ route('visionmissionprojet', ['type'=>'vision','id'=>$vision->id]) }}">{{$vision->title}}</a>
                     </h2>
         
                     <div class="content">
@@ -23,16 +23,18 @@
                     </div>
         
                     <div class="read-more mt-auto align-self-end">
-                      <a href="{{ route('visionmissionprojet', ['designation'=>$vision->title,'id'=>$vision->id]) }}">Lire plus</a>
+                      <a href="{{ route('visionmissionprojet', ['type'=>'vision','id'=>$vision->id]) }}">{{ __('app.read_more') }}</a>
                     </div>
         
                   </article>
-                @endforeach
+                @empty
+                <p class="text-muted">{{ __('app.no_data') }}</p>
+                @endforelse
            
             </div><!-- End post list item -->
     
             <div class="col-lg-4">
-                @foreach ($missions as $mission)
+                @forelse ($missions as $mission)
                 <article class="d-flex flex-column">
     
                     <div class="post-img">
@@ -40,7 +42,7 @@
                     </div>
         
                     <h2 class="title"> 
-                      <a href="{{ route('visionmissionprojet', ['designation'=>$mission->title,'id'=>$mission->id]) }}">{{$mission->title}}</a>
+                      <a href="{{ route('visionmissionprojet', ['type'=>'mission','id'=>$mission->id]) }}">{{$mission->title}}</a>
                     </h2>
         
                     <div class="content">
@@ -50,15 +52,17 @@
                     </div>
         
                     <div class="read-more mt-auto align-self-end">
-                      <a href="{{ route('visionmissionprojet', ['designation'=>$mission->title,'id'=>$mission->id]) }}">Lire plus</a>
+                      <a href="{{ route('visionmissionprojet', ['type'=>'mission','id'=>$mission->id]) }}">{{ __('app.read_more') }}</a>
                     </div>
         
                   </article>
-                @endforeach
+                @empty
+                <p class="text-muted">{{ __('app.no_data') }}</p>
+                @endforelse
             </div><!-- End post list item -->
     
             <div class="col-lg-4">
-                @foreach ($projets as $projet)
+                @forelse ($projets as $projet)
                 <article class="d-flex flex-column">
     
                     <div class="post-img">
@@ -66,7 +70,7 @@
                     </div>
         
                     <h2 class="title">
-                      <a href="{{ route('visionmissionprojet', ['designation'=>$projet->title,'id'=>$projet->id]) }}">{{$projet->title}}</a>
+                      <a href="{{ route('visionmissionprojet', ['type'=>'projet','id'=>$projet->id]) }}">{{$projet->title}}</a>
                     </h2>
         
                     <div class="content">
@@ -76,11 +80,13 @@
                     </div>
         
                     <div class="read-more mt-auto align-self-end">
-                      <a href="{{ route('visionmissionprojet', ['designation'=>$projet->title,'id'=>$projet->id]) }}">Lire plus</a>
+                      <a href="{{ route('visionmissionprojet', ['type'=>'projet','id'=>$projet->id]) }}">{{ __('app.read_more') }}</a>
                     </div>
         
                   </article>
-                @endforeach
+                @empty
+                <p class="text-muted">{{ __('app.no_data') }}</p>
+                @endforelse
             </div><!-- End post list item -->
           </div>
         </div>

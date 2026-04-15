@@ -5,7 +5,6 @@ namespace App\Livewire\Backend;
 use App\Models\Contact;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Flux\Flux;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
@@ -17,7 +16,7 @@ class MessageLivewire extends Component
     public function delete($id)
     {
         $this->idMessage = $id;
-        Flux::modal('delete-message')->show();
+        $this->dispatch('openModal', modalId: 'deleteMessageModal');
     }
 
     public function destroy()
@@ -31,13 +30,13 @@ class MessageLivewire extends Component
         ->show();
     
 
-        Flux::modal('delete-message')->close();
+        $this->dispatch('closeModal', modalId: 'deleteMessageModal');
     }
     public $selectedMessage;
     public function view($id)
     {
         $this->selectedMessage = Contact::findOrFail($id);
-        Flux::modal('view-message')->show();
+        $this->dispatch('openModal', modalId: 'viewMessageModal');
     }
     public function render()
     {

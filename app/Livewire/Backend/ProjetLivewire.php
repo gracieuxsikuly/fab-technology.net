@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Backend;
 
-use Livewire\Component;
+// use Livewire\Component;
 use App\Models\Projet;
-use Flux\Flux;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 class ProjetLivewire extends Component
@@ -47,7 +47,7 @@ class ProjetLivewire extends Component
             $proj->description=$this->description;
             $proj->save();
             $this->reset();
-             Flux::modal('create-projet')->close();
+             $this->dispatch('closeModal', modalId: 'createProjetModal');
              $this->isUpdate=false;
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
@@ -74,7 +74,7 @@ class ProjetLivewire extends Component
             ]);
             $this->isUpdate=false;
             $this->reset();
-             Flux::modal('create-projet')->close();
+             $this->dispatch('closeModal', modalId: 'createProjetModal');
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
             ->toast()
@@ -90,12 +90,12 @@ class ProjetLivewire extends Component
         $this->description= $proj->description;
         $this->oldlogo= $proj->image;
         $this->idprojet=$id;
-        Flux::modal('create-projet')->show();
+        $this->dispatch('openModal', modalId: 'createProjetModal');
     }
 
     public function delete($id){
         $this->idprojet = $id;
-        Flux::modal('delete-projet')->show();
+        $this->dispatch('openModal', modalId: 'deleteProjetModal');
     }
     public function destroy(){
         $projedl = Projet::findOrFail($this->idprojet);
@@ -108,7 +108,7 @@ class ProjetLivewire extends Component
             ->toast()
             ->position('bottom-end')
             ->show();
-        Flux::modal('delete-projet')->close();
+        $this->dispatch('closeModal', modalId: 'deleteProjetModal');
     }
     public function cleanupOldLogo()
     {

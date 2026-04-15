@@ -5,7 +5,6 @@ namespace App\Livewire\Backend;
 use Livewire\Component;
 use App\Models\Faq;
 use Livewire\WithPagination;
-use Flux\Flux;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 class FaqsLivewire extends Component
@@ -39,7 +38,7 @@ public function saveFaq()
         $faq->save();
 
         $this->reset();
-        Flux::modal('create-faq')->close();
+        $this->dispatch('closeModal', modalId: 'createFaqModal');
         $this->isUpdate = false;
 
         LivewireAlert::text('FAQ modifiée avec succès')
@@ -54,7 +53,7 @@ public function saveFaq()
         ]);
 
         $this->reset();
-        Flux::modal('create-faq')->close();
+        $this->dispatch('closeModal', modalId: 'createFaqModal');
 
         LivewireAlert::text('FAQ ajoutée avec succès')
             ->success()
@@ -72,13 +71,13 @@ public function edit($id)
     $this->answer = $faq->answer;
     $this->idfaq = $id;
 
-    Flux::modal('create-faq')->show();
+    $this->dispatch('openModal', modalId: 'createFaqModal');
 }
 
 public function delete($id)
 {
     $this->idfaq = $id;
-    Flux::modal('delete-faq')->show();
+    $this->dispatch('openModal', modalId: 'deleteFaqModal');
 }
 
 public function destroy()
@@ -92,7 +91,7 @@ public function destroy()
         ->position('bottom-end')
         ->show();
 
-    Flux::modal('delete-faq')->close();
+    $this->dispatch('closeModal', modalId: 'deleteFaqModal');
 }
     public function render()
     {

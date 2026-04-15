@@ -4,8 +4,6 @@ namespace App\Livewire\Backend;
 
 use App\Models\Realisationcount;
 use Livewire\Component;
-use App\Models\About;
-use Flux\Flux;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 class RealisationLivewire extends Component
@@ -32,24 +30,22 @@ class RealisationLivewire extends Component
             $real->designation=$this->designation;
             $real->nombre=$this->nombre;
             $real->save();
-            $this->nombre='';
-             Flux::modal('create-realmd')->close();
-             $this->isUpdate=false;
+            $this->reset(['designation', 'nombre', 'idreal', 'isUpdate']);
+             $this->dispatch('closeModal', modalId: 'createRealisationModal');
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
             ->toast()
             ->position('bottom-end')
-            ->show();;
+            ->show();
         }else{
            
             Realisationcount::create([
                 'designation' => $this->designation,
                 'nombre' => $this->nombre,
             ]);
-            $this->nombre='';
-            $this->isUpdate=false;
-             Flux::modal('create-realmd')->close();
-             LivewireAlert::text('Information modifiée avec succès')
+            $this->reset(['designation', 'nombre', 'idreal', 'isUpdate']);
+             $this->dispatch('closeModal', modalId: 'createRealisationModal');
+             LivewireAlert::text('Information ajoutée avec succès')
             ->success()
             ->toast()
             ->position('bottom-end')
@@ -63,12 +59,12 @@ class RealisationLivewire extends Component
         $this->designation=$real->designation;
         $this->nombre=$real->nombre;
         $this->idreal=$real->id;
-        Flux::modal('create-realmd')->show();
+        $this->dispatch('openModal', modalId: 'createRealisationModal');
     }
 
     public function delete($id){
         $this->idreal = $id;
-        Flux::modal('delete-real')->show();
+        $this->dispatch('openModal', modalId: 'deleteRealisationModal');
     }
     public function destroy(){
         $realdel = Realisationcount::findOrFail($this->idreal)->delete();
@@ -78,7 +74,7 @@ class RealisationLivewire extends Component
             ->toast()
             ->position('bottom-end')
             ->show();
-        Flux::modal('delete-real')->close();
+        $this->dispatch('closeModal', modalId: 'deleteRealisationModal');
     }
     public function render()
     {

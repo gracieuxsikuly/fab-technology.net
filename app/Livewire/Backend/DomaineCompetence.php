@@ -5,7 +5,6 @@ namespace App\Livewire\Backend;
 use Livewire\Component;
 use App\Models\Domainecompetence as ModelDomainecompetence;
 use Livewire\WithPagination;
-use Flux\Flux;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 class DomaineCompetence extends Component
@@ -42,7 +41,7 @@ class DomaineCompetence extends Component
             $domaine->save();
 
             $this->reset();
-            Flux::modal('create-domaineinter')->close();
+            $this->dispatch('closeModal', modalId: 'createDomaineModal');
             $this->isUpdate = false;
             LivewireAlert::title('Domaine de compétence')
             ->text('Domaine de compétence modifié avec succès')
@@ -58,7 +57,7 @@ class DomaineCompetence extends Component
             ]);
 
             $this->reset();
-            Flux::modal('create-domaineinter')->close();
+            $this->dispatch('closeModal', modalId: 'createDomaineModal');
             LivewireAlert::title('Domaine de compétence')
             ->text('Domaine de compétence ajouté avec succès')
             ->success()
@@ -77,13 +76,13 @@ class DomaineCompetence extends Component
         $this->couleur = $domaine->couleur;
         $this->idDomaine = $id;
 
-        Flux::modal('create-domaineinter')->show();
+        $this->dispatch('openModal', modalId: 'createDomaineModal');
     }
 
     public function delete($id)
     {
         $this->idDomaine = $id;
-        Flux::modal('delete-domaineinter')->show();
+        $this->dispatch('openModal', modalId: 'deleteDomaineModal');
     }
 
     public function destroy()
@@ -97,7 +96,7 @@ class DomaineCompetence extends Component
         ->show();
     
 
-        Flux::modal('delete-domaineinter')->close();
+        $this->dispatch('closeModal', modalId: 'deleteDomaineModal');
     }
     public function render()
     {

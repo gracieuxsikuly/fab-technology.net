@@ -3,14 +3,14 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>Notre Equipe</h2>
-            <p>Une équipe d'experts passionnés, alliant innovation et rigueur pour transformer vos défis informatiques en solutions pérennes.</p>
+            <h2>{{ __('app.our_team') }}</h2>
+            <p>{{ __('app.team_subtitle') }}</p>
         </div><!-- End Section Title -->
 
         <div class="container">
 
             <div class="row gy-4">
-@foreach ($equipes as $eq)
+@forelse ($equipes as $eq)
 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
     <div class="member">
         <img src="{{ asset('assets/img/equipe/'.$eq->image) }}" class="img-fluid" alt="">
@@ -19,13 +19,15 @@
                 <h4>{{$eq->designation}}</h4>
                 <span>{{$eq->fonction.'/'.$eq->phone}}</span>
                 <div class="social">
-                    <a href="{{$eq->email}}" target="_blank"><i class="bi bi-google"></i></a>
+                    <a href="mailto:{{$eq->email}}" target="_blank"><i class="bi bi-envelope"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </div><!-- End Team Member -->
-@endforeach
+@empty
+<div class="col-12 text-center text-muted">{{ __('app.no_data') }}</div>
+@endforelse
               
             </div>
 

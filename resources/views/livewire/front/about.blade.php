@@ -3,16 +3,15 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>Apropos de nous</h2>
-            {{-- <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p> --}}
+            <h2>{{ __('app.about_section_title') }}</h2>
         </div><!-- End Section Title -->
 
         <div class="container">
 
             <div class="row gy-4">
-                @foreach ($abouts as $about)
+                @forelse ($abouts as $about)
                 <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-                    <p class="who-we-are">Nous sommes</p>
+                    <p class="who-we-are">{{ __('app.we_are') }}</p>
                     <h3>Fab Technology</h3>
                     <p class="fst-italic"  style="text-align: justify;">
                         {{ $about->description }}
@@ -38,7 +37,9 @@
                     </div>
 
                 </div>
-                @endforeach
+                @empty
+                <div class="col-12 text-center text-muted">{{ __('app.no_data') }}</div>
+                @endforelse
             </div>
 
         </div>

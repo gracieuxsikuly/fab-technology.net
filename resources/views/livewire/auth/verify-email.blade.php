@@ -34,24 +34,16 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="mt-4 flex flex-col gap-6">
-    <flux:text class="text-center">
-        {{ __('Please verify your email address by clicking on the link we just emailed to you.') }}
-    </flux:text>
+<div>
+    <h4 class="mb-1 fw-bold">{{ __('Vérification email') }}</h4>
+    <p class="text-muted small mb-3">{{ __('Veuillez vérifier votre adresse email en cliquant sur le lien que nous venons de vous envoyer.') }}</p>
 
     @if (session('status') == 'verification-link-sent')
-        <flux:text class="text-center font-medium !dark:text-green-400 !text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-        </flux:text>
+        <div class="alert alert-success small">{{ __('Un nouveau lien de vérification a été envoyé à votre adresse email.') }}</div>
     @endif
 
-    <div class="flex flex-col items-center justify-between space-y-3">
-        <flux:button wire:click="sendVerification" variant="primary" class="w-full">
-            {{ __('Resend verification email') }}
-        </flux:button>
-
-        <flux:link class="text-sm cursor-pointer" wire:click="logout">
-            {{ __('Log out') }}
-        </flux:link>
+    <div class="d-grid gap-2">
+        <button wire:click="sendVerification" class="btn btn-primary">{{ __('Renvoyer le lien de vérification') }}</button>
+        <button wire:click="logout" class="btn btn-link text-muted small">{{ __('Déconnexion') }}</button>
     </div>
 </div>

@@ -4,7 +4,6 @@ namespace App\Livewire\Backend;
 
 use Livewire\Component;
 use App\Models\Vision;
-use Flux\Flux;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
@@ -26,7 +25,7 @@ class VisionLivewire extends Component
         'title.required' => 'Le titre est requis.',
         'description.required' => 'La description est requise.',
     ];
-    public function savevion(){
+    public function savevision(){
         $this->validate();
         if($this->isUpdate){
             $vision=Vision::find($this->idvision);
@@ -48,7 +47,7 @@ class VisionLivewire extends Component
             $vision->description=$this->description;
             $vision->save();
             $this->reset();
-             Flux::modal('create-vision')->close();
+             $this->dispatch('closeModal', modalId: 'createVisionModal');
              $this->isUpdate=false;
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
@@ -75,7 +74,7 @@ class VisionLivewire extends Component
             ]);
             $this->isUpdate=false;
             $this->reset();
-             Flux::modal('create-vision')->close();
+             $this->dispatch('closeModal', modalId: 'createVisionModal');
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
             ->toast()
@@ -91,12 +90,12 @@ class VisionLivewire extends Component
         $this->description= $vis->description;
         $this->oldlogo= $vis->image;
         $this->idvision=$id;
-        Flux::modal('create-vision')->show();
+        $this->dispatch('openModal', modalId: 'createVisionModal');
     }
 
     public function delete($id){
         $this->idvision = $id;
-        Flux::modal('delete-vision')->show();
+        $this->dispatch('openModal', modalId: 'deleteVisionModal');
     }
     public function destroy(){
         $visdel = Vision::findOrFail($this->idvision);
@@ -109,7 +108,7 @@ class VisionLivewire extends Component
             ->toast()
             ->position('bottom-end')
             ->show();
-        Flux::modal('delete-vision')->close();
+        $this->dispatch('closeModal', modalId: 'deleteVisionModal');
     }
     public function cleanupOldLogo()
     {

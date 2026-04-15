@@ -1,9 +1,3 @@
-<x-layouts.app title="Galerie - Gérez votre galerie">
-    <div class="relative mb-6 w-full">
-        <flux:heading size="xl" level="1">Gallery photo</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{ __('Gérez toutes vos images') }}</flux:subheading>
-        <flux:separator variant="subtle" />
-    </div>
-    <livewire:backend.gallery-livewire/>
-    </x-layouts.app>
-    
+<x-layouts.app :title="__('app.gallery')">
+    <livewire:backend.gallery-livewire />
+</x-layouts.app>

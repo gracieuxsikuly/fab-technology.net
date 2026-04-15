@@ -10,10 +10,7 @@ class DetailService extends Component
     public $slug;
     public function render()
     {
-        $serdets=Service::where('slug', $this->slug)->get();
-        if (!$serdets) {
-            abort(404);
-        }
+        $serdets = Service::where('slug', $this->slug)->firstOrFail();
         return view('livewire.front.detail-service', compact('serdets'));
     }
 }

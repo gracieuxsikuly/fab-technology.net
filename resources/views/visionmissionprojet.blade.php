@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
@@ -85,19 +85,19 @@
     <!-- Page Title -->
     <div class="page-title dark-background" data-aos="fade" style="background-image: url({{asset('assets/img/page-title-bg.webp')}});">
       <div class="container position-relative">
-        <h1>Details</h1>
-        <p>Des solutions tech fiables qui simplifient votre quotidien professionnel.</p>
+        <h1>{{ __('app.details') }}</h1>
+        <p>{{ __('app.detail_page_subtitle') }}</p>
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="{{ route('home')}}">Home</a></li>
-            <li class="current">Details</li>
+            <li><a href="{{ route('home')}}">{{ __('app.home') }}</a></li>
+            <li class="current">{{ __('app.details') }}</li>
           </ol>
         </nav>
       </div>
     </div><!-- End Page Title -->
 
     <!-- Service Details Section -->
-    <livewire:front.visionmissionprojet-detail :designation="$designation" :id="$id" />
+    <livewire:front.visionmissionprojet-detail :type="$type" :id="$id" />
     <!-- /Service Details Section -->
 
   </main>

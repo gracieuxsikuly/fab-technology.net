@@ -22,28 +22,28 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Forgot password')" :description="__('Enter your email to receive a password reset link')" />
+<div>
+    <h4 class="mb-1 fw-bold">{{ __('Mot de passe oublié') }}</h4>
+    <p class="text-muted small mb-4">{{ __('Entrez votre email pour recevoir un lien de réinitialisation') }}</p>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+    @if (session('status'))
+        <div class="alert alert-success text-center small">{{ session('status') }}</div>
+    @endif
 
-    <form wire:submit="sendPasswordResetLink" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email Address')"
-            type="email"
-            required
-            autofocus
-            placeholder="email@example.com"
-        />
+    <form wire:submit="sendPasswordResetLink">
+        <div class="mb-3">
+            <label for="email" class="form-label small fw-semibold">{{ __('Adresse email') }}</label>
+            <input wire:model="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="email@example.com" required autofocus>
+            @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
 
-        <flux:button variant="primary" type="submit" class="w-full">{{ __('Email password reset link') }}</flux:button>
+        <button type="submit" class="btn btn-primary w-100">
+            <span wire:loading.remove>{{ __('Envoyer le lien de réinitialisation') }}</span>
+            <span wire:loading><span class="spinner-border spinner-border-sm me-1"></span>{{ __('Envoi...') }}</span>
+        </button>
     </form>
 
-    <div class="space-x-1 text-center text-sm text-zinc-400">
-        {{ __('Or, return to') }}
-        <flux:link :href="route('login')" wire:navigate>{{ __('log in') }}</flux:link>
+    <div class="text-center mt-3">
+        <a href="{{ route('login') }}" class="small text-decoration-none">{{ __('Retour à la connexion') }}</a>
     </div>
 </div>

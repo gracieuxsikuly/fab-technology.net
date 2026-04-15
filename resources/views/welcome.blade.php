@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
@@ -92,54 +92,45 @@
                 <div class="carousel-item active">
                     <img src="{{asset('assets/img/hero-carousel/hero-carousel-1.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>Infrastructure Réseau de Pointe pour Entreprises</h2>
-                        <p>Nos ingénieurs IT conçoivent et optimisent des infrastructures réseau modernes pour assurer
-                            une connectivité stable et sécurisée. Performance et fiabilité au cœur de votre entreprise.
-                        </p>
-                        <a href="#contact" class="btn-get-started">Entrez en contact</a>
+                        <h2>{{ __('app.hero_title_1') }}</h2>
+                        <p>{{ __('app.hero_desc_1') }}</p>
+                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
                     <img src="{{asset('assets/img/hero-carousel/hero-carousel-6.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>Installation et Configuration de Connexion Internet par Satellite</h2>
-                        <p>Nos ingénieurs spécialisés assurent l’installation et la configuration de solutions VSAT pour
-                            une connectivité internet fiable, même dans les zones les plus reculées. Internet partout,
-                            sans limites.</p>
-                        <a href="#contact" class="btn-get-started">Entrez en contact</a>
+                        <h2>{{ __('app.hero_title_2') }}</h2>
+                        <p>{{ __('app.hero_desc_2') }}</p>
+                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
                     <img src="{{asset('assets/img/hero-carousel/hero-carousel-3.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>Solutions Cloud Innovantes pour Votre Entreprise</h2>
-                        <p>Optimisez vos infrastructures avec nos services de cloud computing, gestion de serveurs
-                            virtuels et solutions de stockage sécurisées. Profitez de la puissance du numérique pour une
-                            performance optimale</p>
-                        <a href="#contact" class="btn-get-started">Entrez en contact</a>
+                        <h2>{{ __('app.hero_title_3') }}</h2>
+                        <p>{{ __('app.hero_desc_3') }}</p>
+                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
                     <img src="{{asset('assets/img/hero-carousel/hero-carousel-4.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>Expertise en Infrastructure Réseau et Serveurs</h2>
-                        <p>Nos ingénieurs IT assurent l’installation et la configuration optimales de vos serveurs dans
-                            un centre de données ultra-moderne. Sécurité, performance et innovation pour une
-                            connectivité sans faille.</p>
-                        <a href="#contact" class="btn-get-started">Entrez en contact</a>
+                        <h2>{{ __('app.hero_title_4') }}</h2>
+                        <p>{{ __('app.hero_desc_4') }}</p>
+                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
                     <img src="{{asset('assets/img/hero-carousel/hero-carousel-5.webp')}}" alt="">
                     <div class="carousel-container">
-                        <h2>Développement Web et Hébergement de Qualité</h2>
-                        <p>Nos experts en programmation web et hébergement assurent des solutions performantes et
-                            adaptées à vos besoins. Une expertise locale pour des services digitaux de pointe</p>
-                        <a href="#contact" class="btn-get-started">Entrez en contact</a>
+                        <h2>{{ __('app.hero_title_5') }}</h2>
+                        <p>{{ __('app.hero_desc_5') }}</p>
+                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
                     </div>
                 </div><!-- End Carousel Item -->
 
@@ -169,6 +160,10 @@
                     <livewire:front.service>
                       {{-- end service --}}
 
+                        <!-- Domaine de compétence Section -->
+                        <livewire:front.domainecompetence>
+                        <!-- /Domaine de compétence Section -->
+
                         <!-- Call To Action Section -->
                         <section id="call-to-action" class="call-to-action section dark-background">
 
@@ -178,12 +173,9 @@
                                 <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
                                     <div class="col-xl-10">
                                         <div class="text-center">
-                                            <h3>Passons à l'action</h3>
-                                            <p>Une solution adaptée à vos besoins vous attend. Contactez-nous dès
-                                                aujourd'hui pour discuter de votre projet et obtenir des résultats
-                                                concrets.</p>
-                                            <a class="cta-btn" style="cursor: pointer;" href="#contact">Passons à
-                                                l'action</a>
+                                            <h3>{{ __('app.cta_title') }}</h3>
+                                            <p>{{ __('app.cta_description') }}</p>
+                                            <a class="cta-btn" style="cursor: pointer;" href="#contact">{{ __('app.cta_title') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -200,8 +192,8 @@
 
                                 <!-- Section Title -->
                                 <div class="container section-title" data-aos="fade-up">
-                                    <h2>Ils nous font confiance</h2>
-                                    <p>Lisez ce que nos clients disent de leur collaboration avec nous.</p>
+                                    <h2>{{ __('app.testimonials_title') }}</h2>
+                                    <p>{{ __('app.testimonials_subtitle') }}</p>
                                 </div><!-- End Section Title -->
 
                                 <div class="container" data-aos="fade-up" data-aos-delay="100">

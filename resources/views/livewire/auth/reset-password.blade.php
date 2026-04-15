@@ -68,46 +68,29 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Reset password')" :description="__('Please enter your new password below')" />
+<div>
+    <h4 class="mb-1 fw-bold">{{ __('Réinitialiser le mot de passe') }}</h4>
+    <p class="text-muted small mb-4">{{ __('Veuillez entrer votre nouveau mot de passe') }}</p>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+    @if (session('status'))
+        <div class="alert alert-success text-center small">{{ session('status') }}</div>
+    @endif
 
-    <form wire:submit="resetPassword" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email')"
-            type="email"
-            required
-            autocomplete="email"
-        />
-
-        <!-- Password -->
-        <flux:input
-            wire:model="password"
-            :label="__('Password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Password')"
-        />
-
-        <!-- Confirm Password -->
-        <flux:input
-            wire:model="password_confirmation"
-            :label="__('Confirm password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Confirm password')"
-        />
-
-        <div class="flex items-center justify-end">
-            <flux:button type="submit" variant="primary" class="w-full">
-                {{ __('Reset password') }}
-            </flux:button>
+    <form wire:submit="resetPassword">
+        <div class="mb-3">
+            <label for="email" class="form-label small fw-semibold">{{ __('Email') }}</label>
+            <input wire:model="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" required autocomplete="email">
+            @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
+        <div class="mb-3">
+            <label for="password" class="form-label small fw-semibold">{{ __('Mot de passe') }}</label>
+            <input wire:model="password" type="password" class="form-control @error('password') is-invalid @enderror" id="password" required autocomplete="new-password">
+            @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+        <div class="mb-3">
+            <label for="password_confirmation" class="form-label small fw-semibold">{{ __('Confirmer le mot de passe') }}</label>
+            <input wire:model="password_confirmation" type="password" class="form-control" id="password_confirmation" required autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">{{ __('Réinitialiser le mot de passe') }}</button>
     </form>
 </div>

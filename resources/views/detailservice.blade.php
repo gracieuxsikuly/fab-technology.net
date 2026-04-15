@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
@@ -85,12 +85,12 @@
     <!-- Page Title -->
     <div class="page-title dark-background" data-aos="fade" style="background-image: url({{asset('assets/img/page-title-bg1.webp')}});">
       <div class="container position-relative">
-        <h1>Details de serivce</h1>
-        <p>Des solutions tech fiables qui simplifient votre quotidien professionnel.</p>
+        <h1>{{ __('app.service_details') }}</h1>
+        <p>{{ __('app.detail_page_subtitle') }}</p>
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="{{ route('home')}}">Home</a></li>
-            <li class="current">Service Details</li>
+            <li><a href="{{ route('home')}}">{{ __('app.home') }}</a></li>
+            <li class="current">{{ __('app.service_details') }}</li>
           </ol>
         </nav>
       </div>

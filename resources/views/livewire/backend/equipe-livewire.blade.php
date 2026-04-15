@@ -1,104 +1,121 @@
 <div>
-    <flux:modal.trigger name="create-equipe-md">
-    <flux:button variant="primary">Enregistrer les informations</flux:button>
-</flux:modal.trigger><br>
-{{-- pour la creation --}}
-<flux:modal name="create-equipe-md" class="md:w-[800px]"> 
-    <div class="space-y-6">
-        <div>
-            @if($isUpdate)
-            <flux:heading size="lg">MODIFIER UNE INFORMATION</flux:heading>
-            @else
-            <flux:heading size="lg">AJOUTER UNE NOUVELLE INFORMATION </flux:heading>
-            @endif
-            <flux:subheading>Ajouter des details pour l'apropos de l'entreprise</flux:subheading>
-        </div>
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createEquipeModal">
+        <i class="bi bi-plus-lg me-1"></i> {{ __('app.add') }}
+    </button>
 
-        <flux:input wire:model.live='designation' label="Désignation" placeholder="La désignation" />
-        <flux:input wire:model.live='fonction' label="Fonction" placeholder="La fonction" />
-        <flux:input wire:model.live='phone' label="Téléphone" placeholder="Le téléphone" type="tel" />
-        <flux:input wire:model.live='email' label="Email" placeholder="L'email" type="email" />
-        <flux:input wire:model.live="image" id="image" label="{{ __('Choose photo') }}" type="file"/>        
-        <div class="flex">
-            <flux:spacer />
-            @if($isUpdate)
-            <flux:button type="submit" variant="primary" wire:click='saveEquipe'>Modifier</flux:button>
-            @else
-            <flux:button type="submit" variant="primary" wire:click='saveEquipe'>Enregistrer</flux:button>
-            @endif
+    <!-- Create/Edit Modal -->
+    <div class="modal fade" id="createEquipeModal" tabindex="-1" wire:ignore.self>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@if($isUpdate) {{ __('app.edit_info') }} @else {{ __('app.add_info') }} @endif</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">{{ __('app.designation') }}</label>
+                            <input wire:model.live="designation" type="text" class="form-control" placeholder="{{ __('app.designation') }}">
+                            @error('designation') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">{{ __('app.fonction') }}</label>
+                            <input wire:model.live="fonction" type="text" class="form-control" placeholder="{{ __('app.fonction') }}">
+                            @error('fonction') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">{{ __('app.phone') }}</label>
+                            <input wire:model.live="phone" type="tel" class="form-control" placeholder="{{ __('app.phone') }}">
+                            @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">{{ __('app.email') }}</label>
+                            <input wire:model.live="email" type="email" class="form-control" placeholder="{{ __('app.email') }}">
+                            @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ __('app.photo') }}</label>
+                        <input wire:model.live="image" type="file" class="form-control" accept="image/*">
+                        @error('image') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.cancel') }}</button>
+                    <button wire:click="saveEquipe" class="btn btn-primary">
+                        <span wire:loading.remove wire:target="saveEquipe">@if($isUpdate) {{ __('app.edit') }} @else {{ __('app.save') }} @endif</span>
+                        <span wire:loading wire:target="saveEquipe"><span class="spinner-border spinner-border-sm"></span></span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-</flux:modal>
 
-
-<flux:modal name="delete-equipe" class="min-w-[22rem]">
-    <div class="space-y-6">
-        <div>
-            <flux:heading size="lg">Suprimer cette information?</flux:heading>
-
-            <flux:subheading>
-                <p>Vous etes entrain de vouloir suprimer cette information</p>
-                <p>Cette action n'as pas de retour</p>
-            </flux:subheading>
-        </div>
-
-        <div class="flex gap-2">
-            <flux:spacer />
-
-            <flux:modal.close>
-                <flux:button variant="ghost">Annuler</flux:button>
-            </flux:modal.close>
-
-            <flux:button type="submit" variant="danger" wire:click='destroy'>Suprimer</flux:button>
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteEquipeModal" tabindex="-1" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">{{ __('app.delete_info') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ __('app.are_you_sure') }}</p>
+                    <p class="text-danger fw-semibold">{{ __('app.delete_warning') }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.cancel') }}</button>
+                    <button wire:click="destroy" class="btn btn-danger">{{ __('app.delete') }}</button>
+                </div>
+            </div>
         </div>
     </div>
-</flux:modal>
-    {{-- fin appel --}}
-    <br>
-   <div class="overflow-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3 font-semibold">ID</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Désignation</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Fonction</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Téléphone</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Email</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Image</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($persons as $person)
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $person->id }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $person->designation }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $person->fonction }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $person->phone }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $person->email }}</td>
-                <td class="px-6 py-4">
-                    @if ($person->image)
-                        <img src="{{ asset('assets/img/equipe/'.$person->image) }}" alt="Image" class="w-16 h-16 rounded-full">
-                    @else
-                        <span class="text-gray-500">Aucune image</span>
-                    @endif
-                </td>
-                <td class="px-6 py-4">
-                    <flux:button wire:click="edit({{ $person->id }})" size="sm" variant="primary">Edit</flux:button>
-                    <br><br>
-                    <flux:button wire:click="delete({{ $person->id }})" size="sm" variant="danger">Delete</flux:button>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300 text-center" colspan="7">Aucune donnée trouvée.</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-    <div class="mt-4">
-        {{ $persons->links() }}
-   </div>
-   </div>
-</body>
+
+    <!-- Table -->
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>{{ __('app.designation') }}</th>
+                            <th>{{ __('app.fonction') }}</th>
+                            <th>{{ __('app.phone') }}</th>
+                            <th>{{ __('app.email') }}</th>
+                            <th>{{ __('app.image') }}</th>
+                            <th>{{ __('app.actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($persons as $person)
+                        <tr>
+                            <td>{{ $person->id }}</td>
+                            <td>{{ $person->designation }}</td>
+                            <td>{{ $person->fonction }}</td>
+                            <td>{{ $person->phone }}</td>
+                            <td>{{ $person->email }}</td>
+                            <td>
+                                @if($person->image)
+                                    <img src="{{ asset('assets/img/equipe/'.$person->image) }}" alt="Image" class="rounded-circle" width="40" height="40" style="object-fit:cover;">
+                                @else
+                                    <span class="badge bg-secondary">-</span>
+                                @endif
+                            </td>
+                            <td>
+                                <button wire:click="edit({{ $person->id }})" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                                <button wire:click="delete({{ $person->id }})" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="7" class="text-center text-muted py-4">{{ __('app.no_messages') }}</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-3">{{ $persons->links() }}</div>
+        </div>
+    </div>
 </div>

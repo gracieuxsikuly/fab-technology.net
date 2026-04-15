@@ -1,100 +1,108 @@
 <div>
-    <flux:modal.trigger name="create-galemd">
-    <flux:button variant="primary">Enregistrer les informations</flux:button>
-</flux:modal.trigger><br>
-{{-- pour la creation --}}
-<flux:modal name="create-galemd" class="md:w-96"> 
-    <div class="space-y-6">
-        <div>
-            @if($isUpdate)
-            <flux:heading size="lg">MODIFIER UNE INFORMATION</flux:heading>
-            @else
-            <flux:heading size="lg">AJOUTER UNE NOUVELLE INFORMATION</flux:heading>
-            @endif
-            <flux:subheading>Ajouter des details pour la gallery</flux:subheading>
-        </div>
-        <flux:select wire:model="categori" placeholder="Selectionner dans la liste..." label="{{ __('Categorie') }}" >
-            @foreach($designationOptions as $key => $value)
-            <flux:select.option value="{{ $key }}">{{ $value }}</flux:select.option>
-            @endforeach
-        </flux:select>
-        <flux:input wire:model.live="title"  id="title" label="{{ __('Titre') }}" />
-        <flux:input wire:model.live="photo" type="file" id="photo" label="{{ __('Choose file') }}" />
-        <div class="flex">
-            <flux:spacer />
-            @if($isUpdate)
-            <flux:button type="submit" variant="primary" wire:click='savegal'>Modifier</flux:button>
-            @else
-            <flux:button type="submit" variant="primary" wire:click='savegal'>Enregistrer</flux:button>
-            @endif
-        </div>
-    </div>
-</flux:modal>
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createGalleryModal">
+        <i class="bi bi-plus-lg me-1"></i> {{ __('app.add') }}
+    </button>
 
-
-<flux:modal name="delete-real" class="min-w-[22rem]">
-    <div class="space-y-6">
-        <div>
-            <flux:heading size="lg">Suprimer cette information?</flux:heading>
-
-            <flux:subheading>
-                <p>Vous etes entrain de vouloir suprimer cette information</p>
-                <p>Cette action n'as pas de retour</p>
-            </flux:subheading>
-        </div>
-
-        <div class="flex gap-2">
-            <flux:spacer />
-
-            <flux:modal.close>
-                <flux:button variant="ghost">Annuler</flux:button>
-            </flux:modal.close>
-
-            <flux:button type="submit" variant="danger" wire:click='destroy'>Suprimer</flux:button>
+    <!-- Create/Edit Modal -->
+    <div class="modal fade" id="createGalleryModal" tabindex="-1" wire:ignore.self>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@if($isUpdate) {{ __('app.edit_info') }} @else {{ __('app.add_info') }} @endif</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ __('app.category') }}</label>
+                        <select wire:model="categori" class="form-select">
+                            <option value="">{{ __('app.search') }}...</option>
+                            @foreach($designationOptions as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
+                        @error('categori') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ __('app.title') }}</label>
+                        <input wire:model.live="title" type="text" class="form-control" placeholder="{{ __('app.title') }}">
+                        @error('title') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ __('app.photo') }}</label>
+                        <input wire:model.live="photo" type="file" class="form-control" accept="image/*">
+                        @error('photo') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.cancel') }}</button>
+                    <button wire:click="savegal" class="btn btn-primary">
+                        <span wire:loading.remove wire:target="savegal">@if($isUpdate) {{ __('app.edit') }} @else {{ __('app.save') }} @endif</span>
+                        <span wire:loading wire:target="savegal"><span class="spinner-border spinner-border-sm"></span></span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-</flux:modal>
-    {{-- fin appel --}}
-    <br>
-   <div class="overflow-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" >
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3 font-semibold">ID</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Titre</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Categori</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Image</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ( $gales as $gal )
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $gal->id }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $gal->title }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $gal->categori }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">
-                    @if($gal->image)
-                    <img src="{{ asset('assets/img/galery/'.$gal->image) }}" alt="Image" class="w-16 h-16 object-cover">
-                    @else
-                    <span class="text-red-500">No Image</span>
-                    @endif
-                </td>
-                <td class="px-6 py-4">
-                    <flux:button wire:click="edit({{ $gal->id }})" size="sm" variant="primary">Edit</flux:button>
-                    <flux:button wire:click="delete({{ $gal->id }})" size="sm" variant="danger">Delete</flux:button>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300 text-center" colspan="4">No data found.</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-    <div class="mt-4">
-        {{ $gales->links() }}
-   </div>
-   </div>
-</body>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteGalleryModal" tabindex="-1" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">{{ __('app.delete_info') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ __('app.are_you_sure') }}</p>
+                    <p class="text-danger fw-semibold">{{ __('app.delete_warning') }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.cancel') }}</button>
+                    <button wire:click="destroy" class="btn btn-danger">{{ __('app.delete') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>{{ __('app.title') }}</th>
+                            <th>{{ __('app.category') }}</th>
+                            <th>{{ __('app.image') }}</th>
+                            <th>{{ __('app.actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($gales as $gal)
+                        <tr>
+                            <td>{{ $gal->id }}</td>
+                            <td>{{ $gal->title }}</td>
+                            <td><span class="badge bg-info">{{ $gal->categori }}</span></td>
+                            <td>
+                                @if($gal->image)
+                                    <img src="{{ asset('assets/img/galery/'.$gal->image) }}" alt="Image" class="rounded" width="50" height="50" style="object-fit:cover;">
+                                @else
+                                    <span class="badge bg-secondary">-</span>
+                                @endif
+                            </td>
+                            <td>
+                                <button wire:click="edit({{ $gal->id }})" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                                <button wire:click="delete({{ $gal->id }})" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="5" class="text-center text-muted py-4">{{ __('app.no_messages') }}</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-3">{{ $gales->links() }}</div>
+        </div>
+    </div>
 </div>

@@ -3,7 +3,6 @@
 namespace App\Livewire\Backend;
 
 use App\Models\About;
-use Flux\Flux;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
@@ -48,7 +47,7 @@ class AboutLivewire extends Component
             $about->description=$this->description;
             $about->save();
             $this->reset();
-             Flux::modal('create-aboutmd')->close();
+             $this->dispatch('closeModal', modalId: 'createAboutModal');
              $this->isUpdate=false;
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
@@ -75,7 +74,7 @@ class AboutLivewire extends Component
             ]);
             $this->isUpdate=false;
             $this->reset();
-             Flux::modal('create-aboutmd')->close();
+             $this->dispatch('closeModal', modalId: 'createAboutModal');
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
             ->toast()
@@ -91,12 +90,12 @@ class AboutLivewire extends Component
         $this->description= $about->description;
         $this->oldlogo= $about->image;
         $this->idabout=$id;
-        Flux::modal('create-aboutmd')->show();
+        $this->dispatch('openModal', modalId: 'createAboutModal');
     }
 
     public function delete($id){
         $this->idabout = $id;
-        Flux::modal('delete-about')->show();
+        $this->dispatch('openModal', modalId: 'deleteAboutModal');
     }
     public function destroy(){
         $aboutdel = About::findOrFail($this->idabout);
@@ -109,7 +108,7 @@ class AboutLivewire extends Component
             ->toast()
             ->position('bottom-end')
             ->show();
-        Flux::modal('delete-about')->close();
+        $this->dispatch('closeModal', modalId: 'deleteAboutModal');
     }
     public function cleanupOldLogo()
     {

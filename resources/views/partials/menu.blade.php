@@ -1,12 +1,19 @@
 <nav id="navmenu" class="navmenu">
     <ul>
-      <li><a href="{{ route('home') }}" class="active">Accueil</a></li>
-      <li><a href="#about">A propos de nous</a></li>
-      <li><a href="#services">Nos Services</a></li>
-      <li><a href="#portfolio">Galeries</a></li>
-      <li><a href="#team">Notre Equipe</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="{{ route('login') }}" class="login-btn"><i class="bi bi-box-arrow-in-right"></i>&nbsp;&nbsp; Connexion</a></li>
+      <li><a href="{{ route('home') }}" class="active">{{ __('app.home') }}</a></li>
+      <li><a href="#about">{{ __('app.about_us') }}</a></li>
+      <li><a href="#services">{{ __('app.our_services') }}</a></li>
+      <li><a href="#portfolio">{{ __('app.our_gallery') }}</a></li>
+      <li><a href="#team">{{ __('app.our_team') }}</a></li>
+      <li><a href="#contact">{{ __('app.contact_us') }}</a></li>
+      <li class="dropdown">
+        <a href="#"><i class="bi bi-globe"></i> {{ app()->getLocale() == 'fr' ? 'FR' : 'EN' }}</a>
+        <ul>
+          <li><a href="{{ url('langue/fr') }}">🇫🇷 {{ __('app.french') }}</a></li>
+          <li><a href="{{ url('langue/en') }}">🇬🇧 {{ __('app.english') }}</a></li>
+        </ul>
+      </li>
+      <li><a href="{{ route('login') }}" class="login-btn"><i class="bi bi-box-arrow-in-right"></i>&nbsp;&nbsp; {{ app()->getLocale() == 'fr' ? 'Connexion' : 'Login' }}</a></li>
     </ul>
     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
   </nav>

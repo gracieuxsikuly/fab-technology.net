@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+// Multilingual switcher
+use App\Http\Controllers\LangController;
+Route::get('langue/{lang}', [LangController::class, 'switch'])->name('lang.switch');
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,9 +13,9 @@ Route::get('/service-details/{slug}', function ($slug) {
     return view('detailservice', ['slug' => $slug]);
 })->name('servicedetails');
 
-Route::get('/fabtech-details/{designation}/{id}', function ($designation,$id) {
+Route::get('/fabtech-details/{type}/{id}', function ($type, $id) {
     return view('visionmissionprojet', [
-        'designation' => $designation,
+        'type' => $type,
         'id' => $id]);
 })->name('visionmissionprojet');
 

@@ -9,22 +9,26 @@ use Livewire\Component;
 
 class VisionmissionprojetDetail extends Component
 {
-    public $designation,$id;
+    public $type, $id;
+
     public function render()
     {
-       switch ($this->designation) {
-            case 'Notre Vision':
-                $datas = Vision::where('id',$this->id)->get();
+        switch ($this->type) {
+            case 'vision':
+                $data = Vision::findOrFail($this->id);
+                $imageFolder = 'vision';
                 break;
-            case 'Notre Mission':
-                $datas = Mission::where('id',$this->id)->get();
+            case 'mission':
+                $data = Mission::findOrFail($this->id);
+                $imageFolder = 'mission';
                 break;
-            case 'Nos Projets':
-                $datas = Projet::where('id',$this->id)->get();
+            case 'projet':
+                $data = Projet::findOrFail($this->id);
+                $imageFolder = 'projet';
                 break;
             default:
-                $datas = null;
+                abort(404);
         }
-        return view('livewire.front.visionmissionprojet-detail',compact('datas'));
+        return view('livewire.front.visionmissionprojet-detail', compact('data', 'imageFolder'));
     }
 }

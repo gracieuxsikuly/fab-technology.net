@@ -4,7 +4,6 @@ namespace App\Livewire\Backend;
 
 use Livewire\Component;
 use App\Models\Service;
-use Flux\Flux;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
@@ -43,7 +42,7 @@ class ServiceLivewire extends Component
                         'photo.max' => 'L\'image ne doit pas dépasser 2 Mo.',
                         ]);
                     $this->photo->store('assets/img/service', 'public');
-                    $this->photo = $this->photo->hashName();;
+                    $this->photo = $this->photo->hashName();
                 $serv->image=$this->photo;
             }
             $serv->title=$this->title;
@@ -53,7 +52,7 @@ class ServiceLivewire extends Component
             $this->title='';
             $this->description='';
             $this->photo=null;
-             Flux::modal('create-servicemd')->close();
+             $this->dispatch('closeModal', modalId: 'createServiceModal');
              $this->isUpdate=false;
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
@@ -83,7 +82,7 @@ class ServiceLivewire extends Component
             $this->description='';
             $this->photo=null;
             $this->isUpdate=false;
-             Flux::modal('create-servicemd')->close();
+             $this->dispatch('closeModal', modalId: 'createServiceModal');
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
             ->toast()
@@ -99,12 +98,12 @@ class ServiceLivewire extends Component
         $this->description= $serv->description;
         $this->oldlogo= $serv->image;
         $this->idserv=$id;
-        Flux::modal('create-servicemd')->show();
+        $this->dispatch('openModal', modalId: 'createServiceModal');
     }
 
     public function delete($id){
         $this->idserv = $id;
-        Flux::modal('delete-servicemd')->show();
+        $this->dispatch('openModal', modalId: 'deleteServiceModal');
     }
     public function destroy(){
         $servdel = Service::findOrFail($this->idserv);
@@ -117,7 +116,7 @@ class ServiceLivewire extends Component
             ->toast()
             ->position('bottom-end')
             ->show();
-        Flux::modal('delete-servicemd')->close();
+        $this->dispatch('closeModal', modalId: 'deleteServiceModal');
     }
     public function cleanupOldLogo()
     {

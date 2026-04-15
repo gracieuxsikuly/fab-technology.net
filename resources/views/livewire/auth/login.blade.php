@@ -73,54 +73,44 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Authentification')" :description="__('Entrez votre email et votre mot de passe ci-dessous pour vous connecter')" />
+<div>
+    <h4 class="mb-1 fw-bold">{{ __('Authentification') }}</h4>
+    <p class="text-muted small mb-4">{{ __('Entrez votre email et votre mot de passe ci-dessous pour vous connecter') }}</p>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+    @if (session('status'))
+        <div class="alert alert-success text-center small">{{ session('status') }}</div>
+    @endif
 
-    <form wire:submit="login" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email address')"
-            type="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="email@example.com"
-        />
+    <form wire:submit="login">
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label small fw-semibold">{{ __('Adresse email') }}</label>
+            <input wire:model="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="email@example.com" required autofocus autocomplete="email">
+            @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
 
         <!-- Password -->
-        <div class="relative">
-            <flux:input
-                wire:model="password"
-                :label="__('Password')"
-                type="password"
-                required
-                autocomplete="current-password"
-                :placeholder="__('Password')"
-            />
-
-            @if (Route::has('password.request'))
-                <flux:link class="absolute right-0 top-0 text-sm" :href="route('password.request')" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </flux:link>
-            @endif
+        <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <label for="password" class="form-label small fw-semibold">{{ __('Mot de passe') }}</label>
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}" class="small text-decoration-none">{{ __('Mot de passe oublié ?') }}</a>
+                @endif
+            </div>
+            <input wire:model="password" type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="{{ __('Mot de passe') }}" required autocomplete="current-password">
+            @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
         <!-- Remember Me -->
-        <flux:checkbox wire:model="remember" :label="__('Remember me')" />
-
-        <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full">{{ __('Log in') }}</flux:button>
+        <div class="form-check mb-3">
+            <input wire:model="remember" class="form-check-input" type="checkbox" id="remember">
+            <label class="form-check-label small" for="remember">{{ __('Se souvenir de moi') }}</label>
         </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-primary w-100">
+            <span wire:loading.remove wire:target="login">{{ __('Se connecter') }}</span>
+            <span wire:loading wire:target="login"><span class="spinner-border spinner-border-sm me-1"></span>{{ __('Connexion...') }}</span>
+        </button>
     </form>
-
-    {{-- @if (Route::has('register'))
-        <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
-            {{ __('Don\'t have an account?') }}
-            <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
-        </div>
-    @endif --}}
 </div>

@@ -1,94 +1,103 @@
 <div>
-    <flux:modal.trigger name="create-domaineinter">
-    <flux:button variant="primary">Enregistrer les informations</flux:button>
-</flux:modal.trigger><br>
-{{-- pour la creation --}}
-<flux:modal name="create-domaineinter" class="md:w-96"> 
-    <div class="space-y-6">
-        <div>
-            @if($isUpdate)
-            <flux:heading size="lg">MODIFIER UNE INFORMATION</flux:heading>
-            @else
-            <flux:heading size="lg">AJOUTER UNE NOUVELLE INFORMATION </flux:heading>
-            @endif
-            <flux:subheading>Ajouter des details pour les realisations</flux:subheading>
-        </div>
-        <flux:input wire:model.live="title"  id="title" label="{{ __('Titre') }}" />
-        <flux:input wire:model.live="value"  id="value" label="{{ __('la valeur en %') }}" />
-        <flux:input wire:model.live="couleur"  id="couleur" label="{{ __('couleur') }}" />
-        <div class="flex">
-            <flux:spacer />
-            @if($isUpdate)
-            <flux:button type="submit" variant="primary" wire:click='saveDomaine'>Modifier</flux:button>
-            @else
-            <flux:button type="submit" variant="primary" wire:click='saveDomaine'>Enregistrer</flux:button>
-            @endif
-        </div>
-    </div>
-</flux:modal>
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createDomaineModal">
+        <i class="bi bi-plus-lg me-1"></i> {{ __('app.add') }}
+    </button>
 
-
-<flux:modal name="delete-domaineinter" class="min-w-[22rem]">
-    <div class="space-y-6">
-        <div>
-            <flux:heading size="lg">Suprimer cette information?</flux:heading>
-
-            <flux:subheading>
-                <p>Vous etes entrain de vouloir suprimer cette information</p>
-                <p>Cette action n'as pas de retour</p>
-            </flux:subheading>
-        </div>
-
-        <div class="flex gap-2">
-            <flux:spacer />
-
-            <flux:modal.close>
-                <flux:button variant="ghost">Annuler</flux:button>
-            </flux:modal.close>
-
-            <flux:button type="submit" variant="danger" wire:click='destroy'>Suprimer</flux:button>
+    <!-- Create/Edit Modal -->
+    <div class="modal fade" id="createDomaineModal" tabindex="-1" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@if($isUpdate) {{ __('app.edit_info') }} @else {{ __('app.add_info') }} @endif</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ __('app.title') }}</label>
+                        <input wire:model.live="title" type="text" class="form-control" placeholder="{{ __('app.title') }}">
+                        @error('title') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ __('app.value_percent') }}</label>
+                        <input wire:model.live="value" type="number" min="0" max="100" class="form-control" placeholder="%">
+                        @error('value') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ __('app.color') }}</label>
+                        <input wire:model.live="couleur" type="color" class="form-control form-control-color" title="{{ __('app.color') }}">
+                        @error('couleur') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.cancel') }}</button>
+                    <button wire:click="saveDomaine" class="btn btn-primary">
+                        <span wire:loading.remove wire:target="saveDomaine">@if($isUpdate) {{ __('app.edit') }} @else {{ __('app.save') }} @endif</span>
+                        <span wire:loading wire:target="saveDomaine"><span class="spinner-border spinner-border-sm"></span></span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-</flux:modal>
-    {{-- fin appel --}}
-    <br>
-   <div class="overflow-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3 font-semibold">ID</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Titre</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Valeur</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Couleur</th>
-                <th scope="col" class="px-6 py-3 font-semibold">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($domainecompetences as $domaine)
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $domaine->id }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $domaine->title }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">{{ $domaine->value }}</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">
-                    <span class="px-3 py-1 rounded-lg text-white" style="background-color: {{ $domaine->couleur }}">
-                        {{ $domaine->couleur }}
-                    </span>
-                </td>
-                <td class="px-6 py-4">
-                    <flux:button wire:click="edit({{ $domaine->id }})" size="sm" variant="primary">Edit</flux:button><br><br>
-                    <flux:button wire:click="delete({{ $domaine->id }})" size="sm" variant="danger">Delete</flux:button>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300 text-center" colspan="5">Aucune donnée trouvée.</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-    
-    <div class="mt-4">
-        {{ $domainecompetences->links() }}
-   </div>
-</div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteDomaineModal" tabindex="-1" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">{{ __('app.delete_info') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ __('app.are_you_sure') }}</p>
+                    <p class="text-danger fw-semibold">{{ __('app.delete_warning') }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.cancel') }}</button>
+                    <button wire:click="destroy" class="btn btn-danger">{{ __('app.delete') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>{{ __('app.title') }}</th>
+                            <th>{{ __('app.value_percent') }}</th>
+                            <th>{{ __('app.color') }}</th>
+                            <th>{{ __('app.actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($domainecompetences as $domaine)
+                        <tr>
+                            <td>{{ $domaine->id }}</td>
+                            <td>{{ $domaine->title }}</td>
+                            <td>
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ $domaine->value }}%; background-color: {{ $domaine->couleur }}" aria-valuenow="{{ $domaine->value }}" aria-valuemin="0" aria-valuemax="100">{{ $domaine->value }}%</div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge rounded-pill text-white px-3 py-2" style="background-color: {{ $domaine->couleur }}">{{ $domaine->couleur }}</span>
+                            </td>
+                            <td>
+                                <button wire:click="edit({{ $domaine->id }})" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                                <button wire:click="delete({{ $domaine->id }})" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="5" class="text-center text-muted py-4">{{ __('app.no_messages') }}</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-3">{{ $domainecompetences->links() }}</div>
+        </div>
+    </div>
 </div>

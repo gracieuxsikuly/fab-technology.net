@@ -11,9 +11,9 @@ class VisionMisionProjet extends Component
 {
     public function render()
     {
-        $visons=Vision::all();
+        $visions=Vision::all();
         $missions=Mission::all();
         $projets=Projet::all();
-        return view('livewire.front.vision-mision-projet',compact('visons','missions','projets'));
+        return view('livewire.front.vision-mision-projet',compact('visions','missions','projets'));
     }
 }

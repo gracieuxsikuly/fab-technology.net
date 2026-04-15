@@ -7,10 +7,7 @@
                     <span class="sitename">Fab-Technology</span>
                 </a>
                 <div class="footer-contact pt-3">
-                    <p style="text-align: justify;">Fab-Technology est une entreprise qui a vu le jour en 2018, est un fournisseur indépendant et 
-                        complet de services et de produits informatiques. Il s’agit d’une entreprise de services 
-                        informatiques et de maintenance devenue l’une des meilleures en RDC et plus particulièrement
-                         au Nord-Kivu dans la ville de Goma. </p>
+                    <p style="text-align: justify;">{{ __('app.footer_description') }}</p>
                    
                 </div>
                 <div class="social-links d-flex mt-4">
@@ -22,14 +19,14 @@
             </div>
 
             <div class="col-lg-4 col-md-3 footer-links">
-                <h4>Liens utiles</h4>
+                <h4>{{ __('app.useful_links') }}</h4>
                 <ul>
-                    <li><a href="{{ route('home') }}" class="active">Accueil</a></li>
-                    <li><a href="#about">A propos de nous</a></li>
-                    <li><a href="#services">Nos Services</a></li>
-                    <li><a href="#portfolio">Galeries</a></li>
-                    <li><a href="#team">Notre Equipe</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{ route('home') }}" class="active">{{ __('app.home') }}</a></li>
+                    <li><a href="#about">{{ __('app.about_us') }}</a></li>
+                    <li><a href="#services">{{ __('app.our_services') }}</a></li>
+                    <li><a href="#portfolio">{{ __('app.our_gallery') }}</a></li>
+                    <li><a href="#team">{{ __('app.our_team') }}</a></li>
+                    <li><a href="#contact">{{ __('app.contact') }}</a></li>
                 </ul>
             </div>
 
@@ -45,22 +42,22 @@
             </div> --}}
 
             <div class="col-lg-4 col-md-12 footer-newsletter">
-                <h4>Nos contacts</h4>
+                <h4>{{ __('app.our_contacts') }}</h4>
                 <p>
                     RDC/Nord-Kivu/Ville de Goma
                 </p>
                 <p class="mt-3">
-                    <strong>Num Tél:</strong> <a href="tel:+243847451389"><span>+243847451389</span></a></p>
+                    <strong>{{ __('app.phone_number') }}</strong> <a href="tel:+243847451389"><span>+243847451389</span></a></p>
                 <p>
-                    <strong>Email:</strong> <a href="mailto:info@fab-technology.net"><span>info@fab-technology.net</span></a> 
+                    <strong>{{ __('app.email') }}:</strong> <a href="mailto:info@fab-technology.net"><span>info@fab-technology.net</span></a> 
                   </p>
                   <p>
                     RDC/Haut Katanga/Haut Katanga ville de Lubumbashi
                 </p>
                 <p class="mt-3">
-                    <strong>Num Tél:</strong> <a href="tel:+243995502421"><span>+243995502421</span></a></p>
+                    <strong>{{ __('app.phone_number') }}</strong> <a href="tel:+243995502421"><span>+243995502421</span></a></p>
                 <p>
-                    <strong>Email:</strong> <a href="mailto:info@fab-technology.net"><span>info@fab-technology.net</span></a> 
+                    <strong>{{ __('app.email') }}:</strong> <a href="mailto:info@fab-technology.net"><span>info@fab-technology.net</span></a> 
                   </p>         
                 {{-- <p>A108 Adam Street</p>
                     <p>New York, NY 535022</p>
@@ -72,12 +69,7 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">
-            @php
-                $year = date('Y');
-                echo $year;
-            @endphp
-            </strong> <span>Tous droits réservés</span>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">{{ date('Y') }}</strong> <span>{{ __('app.all_rights_reserved') }}</span>
         </p>
         <div class="credits">
             Developed by <a href="#">Fab-Technology</a>

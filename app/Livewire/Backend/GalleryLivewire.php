@@ -5,7 +5,6 @@ namespace App\Livewire\Backend;
 use Livewire\Component;
 use App\Models\Galery;
 use Livewire\WithPagination;
-use Flux\Flux;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
@@ -22,14 +21,15 @@ class GalleryLivewire extends Component
     // validation
     protected $rules = [
         'title' => 'required|string|max:255',
-        'categori' => 'required|integ ',
+        'categori' => 'required|string',
     ];
     // message de validation
     protected $messages = [
         'title.required' => 'Le titre est requis.',
-        'categori.required' => 'la categorie est requisw',
+        'categori.required' => 'La catégorie est requise.',
     ];
     public function savegal(){
+        $this->validate();
         if($this->isUpdate){
             $gal=Galery::find($this->idgal);
             if($this->photo){
@@ -49,16 +49,14 @@ class GalleryLivewire extends Component
             $gal->title=$this->title;
             $gal->categori=$this->categori;
             $gal->save();
-             Flux::modal('create-galemd')->close();
+             $this->dispatch('closeModal', modalId: 'createGalleryModal');
              $this->isUpdate=false;
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
             ->toast()
             ->position('bottom-end')
             ->show();
-            $this->title='';
-            $this->categori='';
-            $this->photo='';
+            $this->reset(['title', 'categori', 'photo', 'idgal', 'oldlogo', 'isUpdate']);
         }else{
             if($this->photo){
                 $this->validate([
@@ -78,15 +76,13 @@ class GalleryLivewire extends Component
                 'image' => $this->photo,
             ]);
             $this->isUpdate=false;
-             Flux::modal('create-galemd')->close();
-             LivewireAlert::text('Information modifiée avec succès')
+             $this->dispatch('closeModal', modalId: 'createGalleryModal');
+             LivewireAlert::text('Information ajoutée avec succès')
             ->success()
             ->toast()
             ->position('bottom-end')
             ->show();
-            $this->title='';
-            $this->categori='';
-            $this->photo='';
+            $this->reset(['title', 'categori', 'photo', 'idgal', 'oldlogo', 'isUpdate']);
         }
     }
     public function edit($id){
@@ -95,26 +91,25 @@ class GalleryLivewire extends Component
         $this->title=$gael->title;
         $this->categori=$gael->categori;
         $this->idgal=$gael->id;
-        Flux::modal('create-realmd')->show();
+        $this->dispatch('openModal', modalId: 'createGalleryModal');
     }
 
     public function delete($id){
         $this->idgal = $id;
-        Flux::modal('delete-real')->show();
+        $this->dispatch('openModal', modalId: 'deleteGalleryModal');
     }
     public function destroy(){
-        $galdel = Galery::findOrFail($this->idabout);
+        $galdel = Galery::findOrFail($this->idgal);
         $this->oldlogo = $galdel->image;
         $galdel->delete();
         $this->cleanupOldLogo();
-        $realdel = Galery::findOrFail($this->idgal)->delete();
         LivewireAlert::title('Information Supprimée')
-            ->text('information supprimée avec succès')
+            ->text('Image supprimée avec succès')
             ->success()
             ->toast()
             ->position('bottom-end')
             ->show();
-        Flux::modal('delete-real')->close();
+        $this->dispatch('closeModal', modalId: 'deleteGalleryModal');
     }
     public function cleanupOldLogo()
     {

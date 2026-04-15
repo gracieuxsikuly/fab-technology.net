@@ -3,8 +3,8 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>Questions Frequentes</h2>
-            <p>Vous avez des questions ? Nous avons les réponses ! Parcourez notre FAQ pour éclaircir tous vos doutes.</p>
+            <h2>{{ __('app.faq_title') }}</h2>
+            <p>{{ __('app.faq_subtitle') }}</p>
         </div><!-- End Section Title -->
 
         <div class="container">

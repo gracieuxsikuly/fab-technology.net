@@ -5,7 +5,6 @@ namespace App\Livewire\Backend;
 use Livewire\Component;
 use App\Models\Equipe;
 use Livewire\WithPagination;
-use Flux\Flux;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 class EquipeLivewire extends Component
@@ -64,7 +63,7 @@ class EquipeLivewire extends Component
             $equipe->save();
 
             $this->reset();
-            Flux::modal('create-equipe-md')->close();
+            $this->dispatch('closeModal', modalId: 'createEquipeModal');
             $this->isUpdate = false;
             LivewireAlert::text('Information modifiée avec succès')
                 ->success()
@@ -96,7 +95,7 @@ class EquipeLivewire extends Component
 
             $this->isUpdate = false;
             $this->reset();
-            Flux::modal('create-equipe-md')->close();
+            $this->dispatch('closeModal', modalId: 'createEquipeModal');
             LivewireAlert::text('Information ajoutée avec succès')
                 ->success()
                 ->toast()
@@ -115,13 +114,13 @@ class EquipeLivewire extends Component
         $this->email = $equipe->email;
         $this->oldImage = $equipe->image;
         $this->idEquipe = $id;
-        Flux::modal('create-equipe-md')->show();
+        $this->dispatch('openModal', modalId: 'createEquipeModal');
     }
 
     public function delete($id)
     {
         $this->idEquipe = $id;
-        Flux::modal('delete-equipe')->show();
+        $this->dispatch('openModal', modalId: 'deleteEquipeModal');
     }
 
     public function destroy()
@@ -137,7 +136,7 @@ class EquipeLivewire extends Component
             ->toast()
             ->position('bottom-end')
             ->show();
-        Flux::modal('delete-equipe')->close();
+        $this->dispatch('closeModal', modalId: 'deleteEquipeModal');
     }
 
     public function cleanupOldImage()

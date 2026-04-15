@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Backend;
 
-use Livewire\Component;
+// use Livewire\Component;
 use App\Models\Mission;
-use Flux\Flux;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 class MissionLivewire extends Component
@@ -47,7 +47,7 @@ class MissionLivewire extends Component
             $miss->description=$this->description;
             $miss->save();
             $this->reset();
-             Flux::modal('create-mission')->close();
+             $this->dispatch('closeModal', modalId: 'createMissionModal');
              $this->isUpdate=false;
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
@@ -74,7 +74,7 @@ class MissionLivewire extends Component
             ]);
             $this->isUpdate=false;
             $this->reset();
-             Flux::modal('create-mission')->close();
+             $this->dispatch('closeModal', modalId: 'createMissionModal');
              LivewireAlert::text('Information modifiée avec succès')
             ->success()
             ->toast()
@@ -90,12 +90,12 @@ class MissionLivewire extends Component
         $this->description= $mis->description;
         $this->oldlogo= $mis->image;
         $this->idmission=$id;
-        Flux::modal('create-mission')->show();
+        $this->dispatch('openModal', modalId: 'createMissionModal');
     }
 
     public function delete($id){
         $this->idmission = $id;
-        Flux::modal('delete-mission')->show();
+        $this->dispatch('openModal', modalId: 'deleteMissionModal');
     }
     public function destroy(){
         $misdel = Mission::findOrFail($this->idmission);
@@ -108,7 +108,7 @@ class MissionLivewire extends Component
             ->toast()
             ->position('bottom-end')
             ->show();
-        Flux::modal('delete-mission')->close();
+        $this->dispatch('closeModal', modalId: 'deleteMissionModal');
     }
     public function cleanupOldLogo()
     {

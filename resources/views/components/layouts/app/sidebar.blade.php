@@ -1,148 +1,202 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
-      <!-- Favicons -->
-      <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
-      <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
-    <head>
-        @include('partials.head')
-    </head>
-    <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-            <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ $title ?? 'Administration' }} - Fab-Technology</title>
+    <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <style>
+        :root { --sidebar-width: 260px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; }
+        #sidebar { width: var(--sidebar-width); min-height: 100vh; background: #1e293b; position: fixed; top: 0; left: 0; z-index: 1040; transition: transform .3s ease; }
+        #sidebar .sidebar-header { padding: 1.25rem 1rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+        #sidebar .sidebar-header img { height: 36px; }
+        #sidebar .sidebar-header h5 { color: #fff; font-size: .95rem; margin: 0; }
+        #sidebar .nav-link { color: rgba(255,255,255,.7); padding: .6rem 1rem; font-size: .875rem; border-radius: .375rem; margin: 2px 8px; transition: all .2s; }
+        #sidebar .nav-link:hover, #sidebar .nav-link.active { background: rgba(255,255,255,.1); color: #fff; }
+        #sidebar .nav-link i { width: 20px; text-align: center; margin-right: .6rem; font-size: 1rem; }
+        #sidebar .sidebar-section { color: rgba(255,255,255,.4); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; padding: .75rem 1rem .35rem; font-weight: 600; }
+        #content-wrapper { margin-left: var(--sidebar-width); min-height: 100vh; }
+        .top-navbar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: .6rem 1.5rem; }
+        .top-navbar .btn-toggle-sidebar { display: none; }
+        .user-dropdown img { width: 32px; height: 32px; border-radius: 50%; }
+        @media (max-width: 991.98px) {
+            #sidebar { transform: translateX(-100%); }
+            #sidebar.show { transform: translateX(0); }
+            #content-wrapper { margin-left: 0; }
+            .top-navbar .btn-toggle-sidebar { display: inline-flex; }
+            .sidebar-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 1035; display: none; }
+            .sidebar-backdrop.show { display: block; }
+        }
+    </style>
+    @livewireStyles
+</head>
+<body>
+    <!-- Sidebar Backdrop (mobile) -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
 
-            <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
-                <x-app-logo />
-            </a>
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header d-flex align-items-center gap-2">
+            <img src="{{ asset('assets/img/favicon.png') }}" alt="Logo">
+            <h5>Fab-Technology</h5>
+            <button class="btn btn-sm btn-link text-white ms-auto d-lg-none" onclick="toggleSidebar()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="py-2">
+            <div class="sidebar-section">{{ __('app.dashboard') }}</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                        <i class="bi bi-speedometer2"></i> {{ __('app.dashboard') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">
+                        <i class="bi bi-info-circle"></i> {{ __('app.about') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('realisation') ? 'active' : '' }}" href="{{ route('realisation') }}">
+                        <i class="bi bi-trophy"></i> {{ __('app.realisation') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('vision') ? 'active' : '' }}" href="{{ route('vision') }}">
+                        <i class="bi bi-eye"></i> {{ __('app.vision') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('mission') ? 'active' : '' }}" href="{{ route('mission') }}">
+                        <i class="bi bi-bullseye"></i> {{ __('app.mission') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('projet') ? 'active' : '' }}" href="{{ route('projet') }}">
+                        <i class="bi bi-diagram-3"></i> {{ __('app.projet') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}" href="{{ route('services') }}">
+                        <i class="bi bi-wrench-adjustable"></i> {{ __('app.services') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
+                        <i class="bi bi-images"></i> {{ __('app.gallery') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('equipe') ? 'active' : '' }}" href="{{ route('equipe') }}">
+                        <i class="bi bi-people"></i> {{ __('app.equipe') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('faqs') ? 'active' : '' }}" href="{{ route('faqs') }}">
+                        <i class="bi bi-question-circle"></i> {{ __('app.faqs') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('competencedomaine') ? 'active' : '' }}" href="{{ route('competencedomaine') }}">
+                        <i class="bi bi-pc-display"></i> {{ __('app.competencedomaine') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('message') ? 'active' : '' }}" href="{{ route('message') }}">
+                        <i class="bi bi-envelope"></i> {{ __('app.message') }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Sidebar bottom user -->
+        <div class="mt-auto border-top border-secondary p-3" style="position:absolute;bottom:0;width:100%;">
+            <div class="d-flex align-items-center gap-2">
+                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white fw-bold" style="width:36px;height:36px;font-size:.8rem;">
+                    {{ auth()->user()->initials() }}
+                </div>
+                <div class="grow">
+                    <div class="text-white small fw-semibold text-truncate" style="max-width:140px;">{{ auth()->user()->name }}</div>
+                    <div class="text-white-50" style="font-size:.75rem;">{{ auth()->user()->email }}</div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-            <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="information-circle" :href="route('about')" :current="request()->routeIs('about')" wire:navigate>{{ __('Apropos de nous') }}</flux:navlist.item>
-                    <flux:navlist.item icon="briefcase" :href="route('realisation')" :current="request()->routeIs('realisation')" wire:navigate>{{ __('Realisation') }}</flux:navlist.item>
-                    <flux:navlist.item icon="arrow-trending-up" :href="route('vision')" :current="request()->routeIs('vision')" wire:navigate>{{ __('Notre vision') }}</flux:navlist.item>
-                    <flux:navlist.item icon="bolt" :href="route('mission')" :current="request()->routeIs('mission')" wire:navigate>{{ __('Notre mission') }}</flux:navlist.item>
-                    <flux:navlist.item icon="presentation-chart-line" :href="route('projet')" :current="request()->routeIs('projet')" wire:navigate>{{ __('Nos projets') }}</flux:navlist.item>
-                    <flux:navlist.item icon="wrench" :href="route('services')" :current="request()->routeIs('services')" wire:navigate>{{ __('Nos services') }}</flux:navlist.item>
-                    <flux:navlist.item icon="photo" :href="route('gallery')" :current="request()->routeIs('gallery')" wire:navigate>{{ __('Notre galery') }}</flux:navlist.item>
-                    <flux:navlist.item icon="users" :href="route('equipe')" :current="request()->routeIs('equipe')" wire:navigate>{{ __('Notre equipe') }}</flux:navlist.item>
-                    <flux:navlist.item icon="question-mark-circle" :href="route('faqs')" :current="request()->routeIs('faqs')" wire:navigate>{{ __('Faqs') }}</flux:navlist.item>
-                    <flux:navlist.item icon="computer-desktop" :href="route('competencedomaine')" :current="request()->routeIs('competencedomaine')" wire:navigate>{{ __('Domaine de Competence') }}</flux:navlist.item>
-                    <flux:navlist.item icon="envelope" :href="route('message')" :current="request()->routeIs('message')" wire:navigate>{{ __('Message') }}</flux:navlist.item>
-                </flux:navlist.group>
-            </flux:navlist>
-
-            <flux:spacer />
-
-            <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
-                </flux:navlist.item>
-
-                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
-                {{ __('Documentation') }}
-                </flux:navlist.item>
-            </flux:navlist>
-
-            <!-- Desktop User Menu -->
-            <flux:dropdown position="bottom" align="start">
-                <flux:profile
-                    :name="auth()->user()->name"
-                    :initials="auth()->user()->initials()"
-                    icon-trailing="chevrons-up-down"
-                />
-
-                <flux:menu class="w-[220px]">
-                    <flux:menu.radio.group>
-                        <div class="p-0 text-sm font-normal">
-                            <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                                    <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
-                                    >
-                                        {{ auth()->user()->initials() }}
-                                    </span>
-                                </span>
-
-                                <div class="grid flex-1 text-left text-sm leading-tight">
-                                    <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                    <span class="truncate text-xs">{{ auth()->user()->email }}</span>
-                                </div>
-                            </div>
+    <!-- Content -->
+    <div id="content-wrapper">
+        <!-- Top Navbar -->
+        <nav class="top-navbar d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-sm btn-outline-secondary btn-toggle-sidebar" onclick="toggleSidebar()">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h6 class="mb-0 text-muted">{{ $title ?? 'Administration' }}</h6>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <!-- Language Switcher -->
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="bi bi-translate"></i> {{ strtoupper(app()->getLocale()) }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item {{ app()->getLocale() == 'fr' ? 'active' : '' }}" href="{{ url('langue/fr') }}">{{ __('app.french') }}</a></li>
+                        <li><a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="{{ url('langue/en') }}">{{ __('app.english') }}</a></li>
+                    </ul>
+                </div>
+                <!-- User Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light dropdown-toggle d-flex align-items-center gap-2" data-bs-toggle="dropdown">
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width:28px;height:28px;font-size:.7rem;">
+                            {{ auth()->user()->initials() }}
                         </div>
-                    </flux:menu.radio.group>
+                        <span class="d-none d-md-inline small">{{ auth()->user()->name }}</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{ route('settings.profile') }}"><i class="bi bi-gear me-2"></i>{{ __('app.settings') }}</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>{{ __('app.logout') }}</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-                    <flux:menu.separator />
+        <!-- Page Content -->
+        <main class="p-4">
+            {{ $slot }}
+        </main>
+    </div>
 
-                    <flux:menu.radio.group>
-                        <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('Settings') }}</flux:menu.item>
-                    </flux:menu.radio.group>
-
-                    <flux:menu.separator />
-
-                    <form method="POST" action="{{ route('logout') }}" class="w-full">
-                        @csrf
-                        <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log Out') }}
-                        </flux:menu.item>
-                    </form>
-                </flux:menu>
-            </flux:dropdown>
-        </flux:sidebar>
-
-        <!-- Mobile User Menu -->
-        <flux:header class="lg:hidden">
-            <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
-
-            <flux:spacer />
-
-            <flux:dropdown position="top" align="end">
-                <flux:profile
-                    :initials="auth()->user()->initials()"
-                    icon-trailing="chevron-down"
-                />
-
-                <flux:menu>
-                    <flux:menu.radio.group>
-                        <div class="p-0 text-sm font-normal">
-                            <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                                    <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
-                                    >
-                                        {{ auth()->user()->initials() }}
-                                    </span>
-                                </span>
-
-                                <div class="grid flex-1 text-left text-sm leading-tight">
-                                    <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                    <span class="truncate text-xs">{{ auth()->user()->email }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </flux:menu.radio.group>
-
-                    <flux:menu.separator />
-
-                    <flux:menu.radio.group>
-                        <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('Settings') }}</flux:menu.item>
-                    </flux:menu.radio.group>
-
-                    <flux:menu.separator />
-
-                    <form method="POST" action="{{ route('logout') }}" class="w-full">
-                        @csrf
-                        <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log Out') }}
-                        </flux:menu.item>
-                    </form>
-                </flux:menu>
-            </flux:dropdown>
-        </flux:header>
-
-        {{ $slot }}
-
-        @fluxScripts
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    </body>
-    
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @livewireScripts
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('show');
+            document.getElementById('sidebarBackdrop').classList.toggle('show');
+        }
+        // Bridge Livewire events to Bootstrap modals
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('openModal', (params) => {
+                const modalEl = document.getElementById(params.modalId || params[0]);
+                if (modalEl) new bootstrap.Modal(modalEl).show();
+            });
+            Livewire.on('closeModal', (params) => {
+                const modalEl = document.getElementById(params.modalId || params[0]);
+                if (modalEl) {
+                    const instance = bootstrap.Modal.getInstance(modalEl);
+                    if (instance) instance.hide();
+                }
+            });
+        });
+    </script>
+</body>
 </html>

@@ -32,26 +32,20 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header
-        :title="__('Confirm password')"
-        :description="__('This is a secure area of the application. Please confirm your password before continuing.')"
-    />
+<div>
+    <h4 class="mb-1 fw-bold">{{ __('Confirmer le mot de passe') }}</h4>
+    <p class="text-muted small mb-4">{{ __('Ceci est une zone sécurisée. Veuillez confirmer votre mot de passe avant de continuer.') }}</p>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+    @if (session('status'))
+        <div class="alert alert-success text-center small">{{ session('status') }}</div>
+    @endif
 
-    <form wire:submit="confirmPassword" class="flex flex-col gap-6">
-        <!-- Password -->
-        <flux:input
-            wire:model="password"
-            :label="__('Password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Password')"
-        />
-
-        <flux:button variant="primary" type="submit" class="w-full">{{ __('Confirm') }}</flux:button>
+    <form wire:submit="confirmPassword">
+        <div class="mb-3">
+            <label for="password" class="form-label small fw-semibold">{{ __('Mot de passe') }}</label>
+            <input wire:model="password" type="password" class="form-control @error('password') is-invalid @enderror" id="password" required autocomplete="new-password">
+            @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+        <button type="submit" class="btn btn-primary w-100">{{ __('Confirmer') }}</button>
     </form>
 </div>

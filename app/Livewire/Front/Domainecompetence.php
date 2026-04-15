@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Front;
 
+use App\Models\Domainecompetence as ModelDomainecompetence;
 use Livewire\Component;
 
 class Domainecompetence extends Component
 {
     public function render()
     {
-        return view('livewire.front.domainecompetence');
+        $domainecompetences = ModelDomainecompetence::all();
+        return view('livewire.front.domainecompetence', compact('domainecompetences'));
     }
 }

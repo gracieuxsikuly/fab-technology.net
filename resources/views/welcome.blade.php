@@ -89,50 +89,64 @@
             <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
                 data-bs-interval="5000">
 
-                <div class="carousel-item active">
-                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-1.webp')}}" alt="">
-                    <div class="carousel-container">
-                        <h2>{{ __('app.hero_title_1') }}</h2>
-                        <p>{{ __('app.hero_desc_1') }}</p>
-                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
-                    </div>
-                </div><!-- End Carousel Item -->
+                @if($sliders->isNotEmpty())
+                    @foreach($sliders as $index => $slider)
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <img src="{{asset($slider->image)}}" alt="{{ $slider->title }}">
+                        <div class="carousel-container">
+                            <h2>{{ $slider->title }}</h2>
+                            <p>{{ $slider->description }}</p>
+                            <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
+                    @endforeach
+                @else
+                    {{-- Fallback to static carousel if no sliders are configured --}}
+                    <div class="carousel-item active">
+                        <img src="{{asset('assets/img/hero-carousel/hero-carousel-1.webp')}}" alt="">
+                        <div class="carousel-container">
+                            <h2>{{ __('app.hero_title_1') }}</h2>
+                            <p>{{ __('app.hero_desc_1') }}</p>
+                            <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
 
-                <div class="carousel-item">
-                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-6.webp')}}" alt="">
-                    <div class="carousel-container">
-                        <h2>{{ __('app.hero_title_2') }}</h2>
-                        <p>{{ __('app.hero_desc_2') }}</p>
-                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
-                    </div>
-                </div><!-- End Carousel Item -->
+                    <div class="carousel-item">
+                        <img src="{{asset('assets/img/hero-carousel/hero-carousel-6.webp')}}" alt="">
+                        <div class="carousel-container">
+                            <h2>{{ __('app.hero_title_2') }}</h2>
+                            <p>{{ __('app.hero_desc_2') }}</p>
+                            <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
 
-                <div class="carousel-item">
-                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-3.webp')}}" alt="">
-                    <div class="carousel-container">
-                        <h2>{{ __('app.hero_title_3') }}</h2>
-                        <p>{{ __('app.hero_desc_3') }}</p>
-                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
-                    </div>
-                </div><!-- End Carousel Item -->
+                    <div class="carousel-item">
+                        <img src="{{asset('assets/img/hero-carousel/hero-carousel-3.webp')}}" alt="">
+                        <div class="carousel-container">
+                            <h2>{{ __('app.hero_title_3') }}</h2>
+                            <p>{{ __('app.hero_desc_3') }}</p>
+                            <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
 
-                <div class="carousel-item">
-                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-4.webp')}}" alt="">
-                    <div class="carousel-container">
-                        <h2>{{ __('app.hero_title_4') }}</h2>
-                        <p>{{ __('app.hero_desc_4') }}</p>
-                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
-                    </div>
-                </div><!-- End Carousel Item -->
+                    <div class="carousel-item">
+                        <img src="{{asset('assets/img/hero-carousel/hero-carousel-4.webp')}}" alt="">
+                        <div class="carousel-container">
+                            <h2>{{ __('app.hero_title_4') }}</h2>
+                            <p>{{ __('app.hero_desc_4') }}</p>
+                            <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
 
-                <div class="carousel-item">
-                    <img src="{{asset('assets/img/hero-carousel/hero-carousel-5.webp')}}" alt="">
-                    <div class="carousel-container">
-                        <h2>{{ __('app.hero_title_5') }}</h2>
-                        <p>{{ __('app.hero_desc_5') }}</p>
-                        <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
-                    </div>
-                </div><!-- End Carousel Item -->
+                    <div class="carousel-item">
+                        <img src="{{asset('assets/img/hero-carousel/hero-carousel-5.webp')}}" alt="">
+                        <div class="carousel-container">
+                            <h2>{{ __('app.hero_title_5') }}</h2>
+                            <p>{{ __('app.hero_desc_5') }}</p>
+                            <a href="#contact" class="btn-get-started">{{ __('app.hero_cta') }}</a>
+                        </div>
+                    </div><!-- End Carousel Item -->
+                @endif
 
                 <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>

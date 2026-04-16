@@ -1,11 +1,8 @@
 <nav id="navmenu" class="navmenu">
     <ul>
-      <li><a href="{{ route('home') }}" class="active">{{ __('app.home') }}</a></li>
-      <li><a href="{{ route('home') }}#about">{{ __('app.about_us') }}</a></li>
-      <li><a href="{{ route('home') }}#services">{{ __('app.our_services') }}</a></li>
-      <li><a href="{{ route('home') }}#portfolio">{{ __('app.our_gallery') }}</a></li>
-      <li><a href="{{ route('home') }}#team">{{ __('app.our_team') }}</a></li>
-      <li><a href="{{ route('home') }}#contact">{{ __('app.contact_us') }}</a></li>
+      @foreach($menus as $menu)
+      <li><a href="{{ $menu->getDisplayUrl() }}" @if(request()->path() === trim($menu->getDisplayUrl(), '/')) class="active" @endif>{{ $menu->getDisplayName() }}</a></li>
+      @endforeach
       <li class="dropdown">
         <a href="#"><i class="bi bi-globe"></i> {{ app()->getLocale() == 'fr' ? 'FR' : 'EN' }}</a>
         <ul>

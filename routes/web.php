@@ -4,11 +4,16 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 // Multilingual switcher
 use App\Http\Controllers\LangController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SiteSettingController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\FooterInfoController;
+use App\Http\Controllers\SocialLinkController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\UserController;
 Route::get('langue/{lang}', [LangController::class, 'switch'])->name('lang.switch');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home'); 
+Route::get('/', [HomeController::class, 'index'])->name('home'); 
 Route::get('/service-details/{slug}', function ($slug) {
     return view('detailservice', ['slug' => $slug]);
 })->name('servicedetails');
@@ -68,6 +73,32 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+});
+
+/**
+ * Admin Routes - Site Management
+ */
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    // Users Management
+    Route::resource('users', UserController::class);
+    Route::put('profile/update', [UserController::class, 'updateProfile'])->name('users.updateProfile');
+    Route::get('profile', [UserController::class, 'profile'])->name('users.profile');
+
+    // Site Settings
+    Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [SiteSettingController::class, 'update'])->name('settings.update');
+
+    // Menus
+    Route::resource('menus', MenuController::class);
+    
+    // Footer Infos
+    Route::resource('footer-infos', FooterInfoController::class);
+    
+    // Social Links
+    Route::resource('social-links', SocialLinkController::class);
+    
+    // Sliders
+    Route::resource('sliders', SliderController::class);
 });
 
 

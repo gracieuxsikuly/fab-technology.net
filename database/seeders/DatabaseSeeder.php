@@ -15,8 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-    //    appel messageseeder
+    //    appel messageseeder et admin seeders
         $this->call([
+            SiteSettingSeeder::class,
+            MenuSeeder::class,
+            FooterInfoSeeder::class,
+            SocialLinkSeeder::class,
             MessageSeeder::class,
         ]);
 

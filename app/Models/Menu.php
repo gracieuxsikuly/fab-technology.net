@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Menu extends Model
 {
@@ -49,12 +50,22 @@ class Menu extends Model
     }
 
     /**
-     * Get active menus ordered by order
+     * Get active menus ordered by order (cached for 24 hours)
      */
     public static function getActiveMenus()
     {
-        return self::where('is_active', true)
-            ->orderBy('order')
-            ->get();
+        return Cache::remember('menus.active', 60 * 60 * 24, function () {
+            return self::where('is_active', true)
+                ->orderBy('order')
+                ->get();
+        });
+    }
+
+    /**
+     * Clear the menus cache
+     */
+    public static function clearCache()
+    {
+        Cache::forget('menus.active');
     }
 }

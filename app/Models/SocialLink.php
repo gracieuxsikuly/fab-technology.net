@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class SocialLink extends Model
 {
@@ -22,12 +23,22 @@ class SocialLink extends Model
     ];
 
     /**
-     * Get active social links ordered by order
+     * Get active social links ordered by order - cached for 24 hours
      */
     public static function getActiveSocialLinks()
     {
-        return self::where('is_active', true)
-            ->orderBy('order')
-            ->get();
+        return Cache::remember('social_links.active', 60 * 60 * 24, function () {
+            return self::where('is_active', true)
+                ->orderBy('order')
+                ->get();
+        });
+    }
+
+    /**
+     * Clear the social links cache
+     */
+    public static function clearCache()
+    {
+        Cache::forget('social_links.active');
     }
 }

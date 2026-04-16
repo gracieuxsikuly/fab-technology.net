@@ -42,6 +42,9 @@ class FooterInfoController extends Controller
 
         FooterInfo::create($validated);
 
+        // Clear footer infos cache
+        FooterInfo::clearCache();
+
         return redirect()->route('admin.footer-infos.index')->with('success', 'Information de pied de page créée avec succès.');
     }
 
@@ -71,6 +74,9 @@ class FooterInfoController extends Controller
 
         $footerInfo->update($validated);
 
+        // Clear footer infos cache
+        FooterInfo::clearCache();
+
         return redirect()->route('admin.footer-infos.index')->with('success', 'Information de pied de page mise à jour avec succès.');
     }
 
@@ -80,6 +86,10 @@ class FooterInfoController extends Controller
     public function destroy(FooterInfo $footerInfo)
     {
         $footerInfo->delete();
+
+        // Clear footer infos cache
+        FooterInfo::clearCache();
+
         return redirect()->route('admin.footer-infos.index')->with('success', 'Information de pied de page supprimée avec succès.');
     }
 }

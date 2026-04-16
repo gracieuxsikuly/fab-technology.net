@@ -51,6 +51,9 @@ class SocialLinkController extends Controller
 
         SocialLink::create($validated);
 
+        // Clear social links cache
+        SocialLink::clearCache();
+
         return redirect()->route('admin.social-links.index')->with('success', 'Lien social créé avec succès.');
     }
 
@@ -89,6 +92,9 @@ class SocialLinkController extends Controller
 
         $socialLink->update($validated);
 
+        // Clear social links cache
+        SocialLink::clearCache();
+
         return redirect()->route('admin.social-links.index')->with('success', 'Lien social mis à jour avec succès.');
     }
 
@@ -98,6 +104,10 @@ class SocialLinkController extends Controller
     public function destroy(SocialLink $socialLink)
     {
         $socialLink->delete();
+
+        // Clear social links cache
+        SocialLink::clearCache();
+
         return redirect()->route('admin.social-links.index')->with('success', 'Lien social supprimé avec succès.');
     }
 }

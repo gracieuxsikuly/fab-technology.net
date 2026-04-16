@@ -42,6 +42,9 @@ class MenuController extends Controller
 
         Menu::create($validated);
 
+        // Clear menus cache
+        Menu::clearCache();
+
         return redirect()->route('admin.menus.index')->with('success', 'Menu créé avec succès.');
     }
 
@@ -71,6 +74,9 @@ class MenuController extends Controller
 
         $menu->update($validated);
 
+        // Clear menus cache
+        Menu::clearCache();
+
         return redirect()->route('admin.menus.index')->with('success', 'Menu mis à jour avec succès.');
     }
 
@@ -80,6 +86,10 @@ class MenuController extends Controller
     public function destroy(Menu $menu)
     {
         $menu->delete();
+
+        // Clear menus cache
+        Menu::clearCache();
+
         return redirect()->route('admin.menus.index')->with('success', 'Menu supprimé avec succès.');
     }
 
@@ -97,6 +107,9 @@ class MenuController extends Controller
         foreach ($validated['items'] as $item) {
             Menu::where('id', $item['id'])->update(['order' => $item['order']]);
         }
+
+        // Clear menus cache
+        Menu::clearCache();
 
         return response()->json(['success' => true]);
     }

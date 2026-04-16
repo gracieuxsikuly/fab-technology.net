@@ -63,6 +63,26 @@
             vertical-align: middle;
         }
 
+        .sidebar-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            min-height: 100px;
+        }
+
+        .sidebar-logo img {
+            max-height: 50px;
+            width: auto;
+            border-radius: 4px;
+        }
+
+        .sidebar-logo i {
+            display: inline-block;
+        }
+
         .main-content {
             margin-left: 255px;
             padding: 20px;
@@ -151,7 +171,6 @@
     <!-- Top Navigation -->
     <nav class="navbar">
         <div class="container-fluid">
-            <?php $siteSetting = \App\Models\SiteSetting::getSetting(); ?>
             <a href="{{ route('admin.settings.edit') }}" class="navbar-logo">
                 @if($siteSetting->logo)
                     <img src="{{ asset($siteSetting->logo) }}" alt="{{ $siteSetting->site_name }}">
@@ -184,12 +203,12 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-logo text-center py-4 border-bottom border-secondary">
-            @if($siteSetting->logo)
+            @if($siteSetting && $siteSetting->logo)
                 <img src="{{ asset($siteSetting->logo) }}" alt="{{ $siteSetting->site_name }}" class="sidebar-header-logo">
             @else
-                <i class="bi bi-gear" style="font-size: 40px; color: #1976d2;"></i>
+                <i class="bi bi-gear" style="font-size: 50px; color: #ffffff;"></i>
             @endif
-            <h5 class="text-white mb-0 mt-2"><i class="bi bi-gear"></i> {{ $siteSetting->site_name ?? 'Fab-Technology' }}</h5>
+            <h5 class="text-white mb-0 mt-3"><i class="bi bi-gear"></i> {{ $siteSetting->site_name ?? 'Fab-Technology' }}</h5>
             <small class="text-white-50 d-block mt-1">Gestion du site</small>
         </div>
         <nav class="nav flex-column">

@@ -46,6 +46,9 @@ class SliderController extends Controller
 
         Slider::create($validated);
 
+        // Clear sliders cache
+        Slider::clearCache();
+
         return redirect()->route('admin.sliders.index')->with('success', 'Slider créé avec succès.');
     }
 
@@ -82,6 +85,9 @@ class SliderController extends Controller
 
         $slider->update($validated);
 
+        // Clear sliders cache
+        Slider::clearCache();
+
         return redirect()->route('admin.sliders.index')->with('success', 'Slider mis à jour avec succès.');
     }
 
@@ -94,6 +100,10 @@ class SliderController extends Controller
             unlink(public_path($slider->image));
         }
         $slider->delete();
+
+        // Clear sliders cache
+        Slider::clearCache();
+
         return redirect()->route('admin.sliders.index')->with('success', 'Slider supprimé avec succès.');
     }
 }

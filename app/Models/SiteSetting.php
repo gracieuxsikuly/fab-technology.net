@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class SiteSetting extends Model
 {
@@ -20,13 +21,23 @@ class SiteSetting extends Model
     ];
 
     /**
-     * Get the first/single site setting record.
+     * Get the first/single site setting record - cached for 24 hours
      */
     public static function getSetting()
     {
-        return self::first() ?? self::create([
-            'site_name' => 'Fab-Technology',
-            'site_description' => 'Entreprise de services informatiques',
-        ]);
+        return Cache::remember('site_setting', 60 * 60 * 24, function () {
+            return self::first() ?? self::create([
+                'site_name' => 'Fab-Technology',
+                'site_description' => 'Entreprise de services informatiques',
+            ]);
+        });
+    }
+
+    /**
+     * Clear the site setting cache
+     */
+    public static function clearCache()
+    {
+        Cache::forget('site_setting');
     }
 }

@@ -41,6 +41,7 @@ class AboutLivewire extends Component
                         ]);
                     $this->photo->store('assets/img/about', 'public');
                     $this->photo = $this->photo->hashName();
+
                 $about->image=$this->photo;
             }
             $about->title=$this->title;
@@ -121,6 +122,7 @@ class AboutLivewire extends Component
     }
     public function render()
     {
+       
         $abouts=About::all();
         return view('livewire.backend.about-livewire',compact('abouts'));
     }
